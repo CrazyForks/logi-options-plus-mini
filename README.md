@@ -4,6 +4,10 @@
 
 **Logi Options+ mini** 提供了一种选择来自定义 Logi Options+，方便用户能够更好地控制其功能。
 
+🎉 Logi Options+ mini for Windows 版本发布！欢迎大家[下载](https://github.com/Qetesh/logi-options-plus-mini/releases)体验，并反馈使用过程中遇到的问题或建议 ❤️
+
+<img width="600" height="1812" alt="ScreenShot_2026-02-25_015557_350" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/11adddd4-bf0e-4e6d-b164-483b2521e228">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/86024914-4650-4966-ba81-77d59fee5696">
