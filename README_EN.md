@@ -5,7 +5,7 @@
 
 🎉 Logi Options+ Mini for Windows is now available! Welcome to [download](https://github.com/Qetesh/logi-options-plus-mini/releases) it￼, try it out, and share any issues or suggestions ❤️
 
-<img width="600" height="1812" alt="ScreenShot_2026-02-25_015557_350" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
+<img width="600" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
 
 
 <picture>
