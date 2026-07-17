@@ -1,0 +1,798 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F109334D2E4A70E50053B236 /* Logi Options+ mini Agent in Resources */ = {isa = PBXBuildFile; fileRef = F122D8A92E49E8F000E3BEC0 /* Logi Options+ mini Agent */; };
+		F153B3BC2E980C9700B91178 /* SwiftGlass in Frameworks */ = {isa = PBXBuildFile; productRef = F153B3BB2E980C9700B91178 /* SwiftGlass */; };
+		F153B3BF2E98124300B91178 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F153B3BE2E98124300B91178 /* ConfettiSwiftUI */; };
+		F16222B72D6646A0006A59CD /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F16222B62D6646A0006A59CD /* Sparkle */; };
+		F1831C672D62F5D900D61686 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = F1831C662D62F5D900D61686 /* ZipArchive */; };
+		F1831C772D648F8900D61686 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = F1831C762D648F8900D61686 /* Logging */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F122D73C2E490FDA00E3BEC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F19D9E152D0F25B8009680EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F19D9E1C2D0F25B8009680EF;
+			remoteInfo = "Logi Options+ mini";
+		};
+		F1AF0E122E4DC3C400E4A629 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F19D9E152D0F25B8009680EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F122D8A82E49E8F000E3BEC0;
+			remoteInfo = "Logi Options+ mini Agent";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F10933972E4B3DEE0053B236 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchDaemons;
+			dstSubfolderSpec = 1;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F122D8A72E49E8F000E3BEC0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F122D7312E4901F200E3BEC0 /* Logi-Options-Plus-mini-test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logi-Options-Plus-mini-test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F122D8A92E49E8F000E3BEC0 /* Logi Options+ mini Agent */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Logi Options+ mini Agent"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F19D9E1D2D0F25B8009680EF /* Logi Options+ mini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Logi Options+ mini.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		F10933992E4B3E0D0053B236 /* Exceptions for "Logi Options+ mini Agent" folder in "Copy Files" phase from "Logi Options+ mini" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = F10933972E4B3DEE0053B236 /* CopyFiles */;
+			membershipExceptions = (
+				"io.qetesh.logi-options-plus-mini.agent.plist",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F122D7322E4901F200E3BEC0 /* Logi-Options-Plus-mini-test */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Logi-Options-Plus-mini-test";
+			sourceTree = "<group>";
+		};
+		F122D8AA2E49E8F000E3BEC0 /* Logi Options+ mini Agent */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F10933992E4B3E0D0053B236 /* Exceptions for "Logi Options+ mini Agent" folder in "Copy Files" phase from "Logi Options+ mini" target */,
+			);
+			path = "Logi Options+ mini Agent";
+			sourceTree = "<group>";
+		};
+		F19D9E1F2D0F25B8009680EF /* Logi Options+ mini */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Logi Options+ mini";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F122D72E2E4901F200E3BEC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F122D8A62E49E8F000E3BEC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F19D9E1A2D0F25B8009680EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F153B3BF2E98124300B91178 /* ConfettiSwiftUI in Frameworks */,
+				F16222B72D6646A0006A59CD /* Sparkle in Frameworks */,
+				F153B3BC2E980C9700B91178 /* SwiftGlass in Frameworks */,
+				F1831C772D648F8900D61686 /* Logging in Frameworks */,
+				F1831C672D62F5D900D61686 /* ZipArchive in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F19D9E142D0F25B8009680EF = {
+			isa = PBXGroup;
+			children = (
+				F19D9E1F2D0F25B8009680EF /* Logi Options+ mini */,
+				F122D7322E4901F200E3BEC0 /* Logi-Options-Plus-mini-test */,
+				F122D8AA2E49E8F000E3BEC0 /* Logi Options+ mini Agent */,
+				F19D9E1E2D0F25B8009680EF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F19D9E1E2D0F25B8009680EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F19D9E1D2D0F25B8009680EF /* Logi Options+ mini.app */,
+				F122D7312E4901F200E3BEC0 /* Logi-Options-Plus-mini-test.xctest */,
+				F122D8A92E49E8F000E3BEC0 /* Logi Options+ mini Agent */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F122D7302E4901F200E3BEC0 /* Logi-Options-Plus-mini-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F122D7352E4901F200E3BEC0 /* Build configuration list for PBXNativeTarget "Logi-Options-Plus-mini-test" */;
+			buildPhases = (
+				F122D72D2E4901F200E3BEC0 /* Sources */,
+				F122D72E2E4901F200E3BEC0 /* Frameworks */,
+				F122D72F2E4901F200E3BEC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F122D73D2E490FDA00E3BEC0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F122D7322E4901F200E3BEC0 /* Logi-Options-Plus-mini-test */,
+			);
+			name = "Logi-Options-Plus-mini-test";
+			packageProductDependencies = (
+			);
+			productName = "Logi-Options-Plus-mini-test";
+			productReference = F122D7312E4901F200E3BEC0 /* Logi-Options-Plus-mini-test.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F122D8A82E49E8F000E3BEC0 /* Logi Options+ mini Agent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F122D8AF2E49E8F000E3BEC0 /* Build configuration list for PBXNativeTarget "Logi Options+ mini Agent" */;
+			buildPhases = (
+				F122D8A52E49E8F000E3BEC0 /* Sources */,
+				F122D8A62E49E8F000E3BEC0 /* Frameworks */,
+				F122D8A72E49E8F000E3BEC0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F122D8AA2E49E8F000E3BEC0 /* Logi Options+ mini Agent */,
+			);
+			name = "Logi Options+ mini Agent";
+			packageProductDependencies = (
+			);
+			productName = "Logi Options+ mini Agent";
+			productReference = F122D8A92E49E8F000E3BEC0 /* Logi Options+ mini Agent */;
+			productType = "com.apple.product-type.tool";
+		};
+		F19D9E1C2D0F25B8009680EF /* Logi Options+ mini */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F19D9E442D0F25B9009680EF /* Build configuration list for PBXNativeTarget "Logi Options+ mini" */;
+			buildPhases = (
+				F19D9E192D0F25B8009680EF /* Sources */,
+				F19D9E1A2D0F25B8009680EF /* Frameworks */,
+				F19D9E1B2D0F25B8009680EF /* Resources */,
+				F10933972E4B3DEE0053B236 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1AF0E132E4DC3C400E4A629 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F19D9E1F2D0F25B8009680EF /* Logi Options+ mini */,
+			);
+			name = "Logi Options+ mini";
+			packageProductDependencies = (
+				F1831C662D62F5D900D61686 /* ZipArchive */,
+				F1831C762D648F8900D61686 /* Logging */,
+				F16222B62D6646A0006A59CD /* Sparkle */,
+				F153B3BB2E980C9700B91178 /* SwiftGlass */,
+				F153B3BE2E98124300B91178 /* ConfettiSwiftUI */,
+			);
+			productName = "Logi Options Plus Mini";
+			productReference = F19D9E1D2D0F25B8009680EF /* Logi Options+ mini.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F19D9E152D0F25B8009680EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					F122D7302E4901F200E3BEC0 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = F19D9E1C2D0F25B8009680EF;
+					};
+					F122D8A82E49E8F000E3BEC0 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					F19D9E1C2D0F25B8009680EF = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = F19D9E182D0F25B8009680EF /* Build configuration list for PBXProject "Logi Options+ mini" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = F19D9E142D0F25B8009680EF;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F1831C652D62F5D900D61686 /* XCRemoteSwiftPackageReference "ZipArchive" */,
+				F1831C752D648F8900D61686 /* XCRemoteSwiftPackageReference "swift-log" */,
+				F16222B52D6646A0006A59CD /* XCRemoteSwiftPackageReference "Sparkle" */,
+				F153B3BA2E980C9700B91178 /* XCRemoteSwiftPackageReference "SwiftGlass" */,
+				F153B3BD2E9810E900B91178 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F19D9E1E2D0F25B8009680EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F19D9E1C2D0F25B8009680EF /* Logi Options+ mini */,
+				F122D7302E4901F200E3BEC0 /* Logi-Options-Plus-mini-test */,
+				F122D8A82E49E8F000E3BEC0 /* Logi Options+ mini Agent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F122D72F2E4901F200E3BEC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F19D9E1B2D0F25B8009680EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F109334D2E4A70E50053B236 /* Logi Options+ mini Agent in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F122D72D2E4901F200E3BEC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F122D8A52E49E8F000E3BEC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F19D9E192D0F25B8009680EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F122D73D2E490FDA00E3BEC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F19D9E1C2D0F25B8009680EF /* Logi Options+ mini */;
+			targetProxy = F122D73C2E490FDA00E3BEC0 /* PBXContainerItemProxy */;
+		};
+		F1AF0E132E4DC3C400E4A629 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F122D8A82E49E8F000E3BEC0 /* Logi Options+ mini Agent */;
+			targetProxy = F1AF0E122E4DC3C400E4A629 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F122D7362E4901F200E3BEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.qetesh.Logi-Options-Plus-mini-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Logi Options+ mini.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Logi Options+ mini";
+				TVOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		F122D7372E4901F200E3BEC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.qetesh.Logi-Options-Plus-mini-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Logi Options+ mini.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Logi Options+ mini";
+				TVOS_DEPLOYMENT_TARGET = 26.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F122D8AD2E49E8F000E3BEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Logi Options+ mini Agent/Agent.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_OUTPUT_FORMAT = binary;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.qetesh.Logi-Options-Plus-mini-agent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F122D8AE2E49E8F000E3BEC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Logi Options+ mini Agent/Agent.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_OUTPUT_FORMAT = binary;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.qetesh.Logi-Options-Plus-mini-agent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F19D9E422D0F25B9009680EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F19D9E432D0F25B9009680EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		F19D9E452D0F25B9009680EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Logi Options+ mini/Logi_Options_Plus_Mini.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 19;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Logi Options+ mini/Preview Content\"";
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Logi-Options-Plus-Mini-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Logi Options+ mini";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.9.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.qetesh.Logi-Options-Plus-mini";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F19D9E462D0F25B9009680EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Logi Options+ mini/Logi_Options_Plus_Mini.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 19;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Logi Options+ mini/Preview Content\"";
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				"EXCLUDED_SOURCE_FILE_NAMES[arch=*]" = "*/logi_options_plus_installer/*.md";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Logi-Options-Plus-Mini-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Logi Options+ mini";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.9.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.qetesh.Logi-Options-Plus-mini";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F122D7352E4901F200E3BEC0 /* Build configuration list for PBXNativeTarget "Logi-Options-Plus-mini-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F122D7362E4901F200E3BEC0 /* Debug */,
+				F122D7372E4901F200E3BEC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F122D8AF2E49E8F000E3BEC0 /* Build configuration list for PBXNativeTarget "Logi Options+ mini Agent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F122D8AD2E49E8F000E3BEC0 /* Debug */,
+				F122D8AE2E49E8F000E3BEC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F19D9E182D0F25B8009680EF /* Build configuration list for PBXProject "Logi Options+ mini" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F19D9E422D0F25B9009680EF /* Debug */,
+				F19D9E432D0F25B9009680EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F19D9E442D0F25B9009680EF /* Build configuration list for PBXNativeTarget "Logi Options+ mini" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F19D9E452D0F25B9009680EF /* Debug */,
+				F19D9E462D0F25B9009680EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F153B3BA2E980C9700B91178 /* XCRemoteSwiftPackageReference "SwiftGlass" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/1998code/SwiftGlass.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 26.0.1;
+			};
+		};
+		F153B3BD2E9810E900B91178 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		F16222B52D6646A0006A59CD /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.1;
+			};
+		};
+		F1831C652D62F5D900D61686 /* XCRemoteSwiftPackageReference "ZipArchive" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ZipArchive/ZipArchive.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
+		F1831C752D648F8900D61686 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F153B3BB2E980C9700B91178 /* SwiftGlass */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F153B3BA2E980C9700B91178 /* XCRemoteSwiftPackageReference "SwiftGlass" */;
+			productName = SwiftGlass;
+		};
+		F153B3BE2E98124300B91178 /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F153B3BD2E9810E900B91178 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+		F16222B62D6646A0006A59CD /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F16222B52D6646A0006A59CD /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+		F1831C662D62F5D900D61686 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1831C652D62F5D900D61686 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
+		};
+		F1831C762D648F8900D61686 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1831C752D648F8900D61686 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F19D9E152D0F25B8009680EF /* Project object */;
+}

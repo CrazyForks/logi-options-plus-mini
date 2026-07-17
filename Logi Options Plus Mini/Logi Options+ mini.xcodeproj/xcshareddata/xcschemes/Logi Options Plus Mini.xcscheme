@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "2620"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F19D9E1C2D0F25B8009680EF"
+               BuildableName = "Logi Options+ mini.app"
+               BlueprintName = "Logi Options+ mini"
+               ReferencedContainer = "container:Logi Options+ mini.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F19D9E2F2D0F25B9009680EF"
+               BuildableName = "Logi Options Plus MiniTests.xctest"
+               BlueprintName = "Logi Options Plus MiniTests"
+               ReferencedContainer = "container:Logi Options+ mini.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F19D9E392D0F25B9009680EF"
+               BuildableName = "Logi Options Plus MiniUITests.xctest"
+               BlueprintName = "Logi Options Plus MiniUITests"
+               ReferencedContainer = "container:Logi Options+ mini.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F19D9E1C2D0F25B8009680EF"
+            BuildableName = "Logi Options+ mini.app"
+            BlueprintName = "Logi Options+ mini"
+            ReferencedContainer = "container:Logi Options+ mini.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "#!/bin/bash&#10;# Logi Options+ mini - Post Archive Action Script&#10;# &#x7528;&#x4e8e; Xcode Scheme Archive Post-action&#10;# &#x8bbe;&#x7f6e;&#x65b9;&#x5f0f;: Product &gt; Scheme &gt; Edit Scheme &gt; Archive &gt; Post-actions &gt; New Run Script Action&#10;# Shell: /bin/bash&#10;# Provide build settings from: Logi Options+ mini&#10;&#10;set -euo pipefail&#10;&#10;# === Configuration ===&#10;APP_NAME=&quot;Logi Options+ mini&quot;&#10;PROJECT_DIR=&quot;${HOME}/Developer/Logi Options Plus Mini&quot;&#10;BUILD_DMG_DIR=&quot;${HOME}/Downloads/Logi Options Plus Mini Build&quot;&#10;&#10;# Log file for debugging&#10;LOG_FILE=&quot;${BUILD_DMG_DIR}/build.log&quot;&#10;&#10;# === Functions ===&#10;log() {&#10;    echo &quot;[$(date &apos;+%Y-%m-%d %H:%M:%S&apos;)] $1&quot; | tee -a &quot;$LOG_FILE&quot;&#10;}&#10;&#10;error_exit() {&#10;    log &quot;&#x274c; Error: $1&quot;&#10;    osascript -e &quot;display notification \&quot;$1\&quot; with title \&quot;Build Failed\&quot;&quot;&#10;    exit 1&#10;}&#10;&#10;# === Find Sparkle tools dynamically ===&#10;find_sparkle_bin() {&#10;    local sparkle_bin&#10;    sparkle_bin=$(find &quot;${HOME}/Library/Developer/Xcode/DerivedData&quot; -path &quot;*/Sparkle/bin&quot; -type d 2&gt;/dev/null | head -1)&#10;    &#10;    if [[ -z &quot;$sparkle_bin&quot; ]]; then&#10;        # Fallback: check common locations&#10;        if [[ -d &quot;${PROJECT_DIR}/Pods/Sparkle/bin&quot; ]]; then&#10;            sparkle_bin=&quot;${PROJECT_DIR}/Pods/Sparkle/bin&quot;&#10;        fi&#10;    fi&#10;    &#10;    echo &quot;$sparkle_bin&quot;&#10;}&#10;&#10;# === Main Script ===&#10;main() {&#10;    # Clean and create build directory&#10;    rm -rf &quot;$BUILD_DMG_DIR&quot;&#10;    mkdir -p &quot;$BUILD_DMG_DIR&quot;&#10;    &#10;    log &quot;== Logi Options+ mini Post-Archive Build ==&quot;&#10;    log &quot;Archive Path: ${ARCHIVE_PATH:-&apos;Not set (manual run)&apos;}&quot;&#10;    &#10;    # Get archive path from Xcode environment or find latest&#10;    local archive_path=&quot;${ARCHIVE_PATH:-}&quot;&#10;    &#10;    if [[ -z &quot;$archive_path&quot; ]]; then&#10;        log &quot;ARCHIVE_PATH not set, finding latest archive...&quot;&#10;        archive_path=$(find &quot;${HOME}/Library/Developer/Xcode/Archives&quot; -name &quot;*.xcarchive&quot; -type d -maxdepth 2 2&gt;/dev/null | sort -r | head -1)&#10;    fi&#10;    &#10;    if [[ -z &quot;$archive_path&quot; ]] || [[ ! -d &quot;$archive_path&quot; ]]; then&#10;        error_exit &quot;No archive found&quot;&#10;    fi&#10;    &#10;    log &quot;Using archive: $archive_path&quot;&#10;    &#10;    # Copy app from archive&#10;    local app_path=&quot;${archive_path}/Products/Applications/${APP_NAME}.app&quot;&#10;    &#10;    if [[ ! -d &quot;$app_path&quot; ]]; then&#10;        error_exit &quot;App not found at $app_path&quot;&#10;    fi&#10;    &#10;    log &quot;Copying app to build directory...&quot;&#10;    cp -R &quot;$app_path&quot; &quot;$BUILD_DMG_DIR/&quot;&#10;    cp &quot;${PROJECT_DIR}/appcast.xml&quot; &quot;${BUILD_DMG_DIR}/&quot;&#10;    &#10;    # Build DMG&#10;    local dmgcanvas_path=&quot;${PROJECT_DIR}/Logi Options+ mini.dmgcanvas&quot;&#10;    &#10;    if [[ ! -d &quot;$dmgcanvas_path&quot; ]]; then&#10;        error_exit &quot;DMG Canvas file not found at $dmgcanvas_path&quot;&#10;    fi&#10;    &#10;    log &quot;Building DMG...&quot;&#10;    cp -R &quot;$dmgcanvas_path&quot; &quot;$BUILD_DMG_DIR/&quot;&#10;    &#10;    cd &quot;$BUILD_DMG_DIR&quot;&#10;    &#10;    if ! /usr/local/bin/dmgcanvas &quot;Logi Options+ mini.dmgcanvas&quot; &quot;${APP_NAME}.dmg&quot; &gt;&gt; &quot;$LOG_FILE&quot; 2&gt;&amp;1; then&#10;        error_exit &quot;DMG creation failed&quot;&#10;    fi&#10;    &#10;    log &quot;&#x2705; DMG created: ${APP_NAME}.dmg&quot;&#10;    &#10;    # Sparkle signature&#10;    local sparkle_bin&#10;    sparkle_bin=$(find_sparkle_bin)&#10;    &#10;    if [[ -n &quot;$sparkle_bin&quot; ]] &amp;&amp; [[ -x &quot;${sparkle_bin}/generate_keys&quot; ]]; then&#10;        log &quot;Generating Sparkle generate_keys...&quot;&#10;        &quot;${sparkle_bin}/generate_appcast&quot; \&#10;        --maximum-versions 0 \&#10;        &quot;${BUILD_DMG_DIR}/&quot; &gt;&gt; &quot;$LOG_FILE&quot; 2&gt;&amp;1 \&#10;        || log &quot;&#x26a0;&#xfe0f; Sparkle signing skipped&quot;&#10;    else&#10;        log &quot;&#x26a0;&#xfe0f; Sparkle tools not found, skipping signature&quot;&#10;    fi&#10;    &#10;    # Success notification&#10;    log &quot;&#x2705; Build complete!&quot;&#10;    log &quot;&#x1f4e6; Output: ${BUILD_DMG_DIR}/${APP_NAME}.dmg&quot;&#10;    &#10;    osascript -e &quot;display notification \&quot;DMG created successfully\&quot; with title \&quot;Build Complete\&quot; sound name \&quot;Glass\&quot;&quot;&#10;    &#10;    # Open output folder&#10;    open &quot;$BUILD_DMG_DIR&quot;&#10;&#10;    # clean up&#10;    rm -rf &quot;$archive_path&quot;&#10;    log &quot;&#x2705; Archive deleted!&quot;&#10;}&#10;&#10;main &quot;$@&quot;&#10;&#10;">
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+   </ArchiveAction>
+</Scheme>

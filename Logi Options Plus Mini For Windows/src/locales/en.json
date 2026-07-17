@@ -1,0 +1,123 @@
+{
+  "app": {
+    "title": "Logi Options+ mini"
+  },
+  "features": {
+    "title": "Select the features to install:",
+    "quiet": "Installs the app silently without the UI.",
+    "analytics": "Shows or hides choice for users to opt in to share app usage and diagnostics data.",
+    "flow": "Shows or hides the Flow feature.",
+    "sso": "Shows or hides ability for users to sign into the app.",
+    "update": "Enables or disables app updates.",
+    "dfu": "Enables or disables device firmware updates.",
+    "backlight": "Enables or disables keyboard backlight on the supported keyboards.",
+    "logivoice": "Enables or disables LogiVoice feature.",
+    "aipromptbuilder": "Enables or disables AI Prompt Builder feature.",
+    "device-recommendation": "Enables or disables device recommendation feature.",
+    "smartactions": "Enables or disables Smart Actions feature.",
+    "actions-ring": "Enables or disables Actions Ring feature."
+  },
+  "version": {
+    "installed": "Logi Options+ installed version:",
+    "latest": "Logi Options+ latest stable version:",
+    "notInstalled": "not installed",
+    "loading": "Loading...",
+    "refreshInstalled": "Click to refresh installed version",
+    "refreshLatest": "Click to refresh latest version"
+  },
+  "buttons": {
+    "install": "Install/Update",
+    "uninstall": "Uninstall",
+    "fix": "Fix ▼"
+  },
+  "fix": {
+    "jsError": "Fix JavaScript Error"
+  },
+  "progress": {
+    "idle": "Ready",
+    "downloading": "Downloading installer...",
+    "extracting": "Extracting...",
+    "backup": "Backing up config...",
+    "uninstalling": "Uninstalling...",
+    "restoring": "Restoring config...",
+    "installing": "Installing...",
+    "completed": "Completed!",
+    "failed": "Failed"
+  },
+  "log": {
+    "title": "Activity Log",
+    "hide": "Hide Log",
+    "view": "View Log",
+    "clear": "Clear"
+  },
+  "dialog": {
+    "confirmDelete": {
+      "title": "Confirm Delete Files",
+      "message": "The following {{count}} file(s) will be deleted:",
+      "warning": "These corrupted config backup files may cause JavaScript errors in Logi Options+.",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "noFiles": {
+      "title": "Fix JavaScript Error",
+      "message": "No corrupted config backup files found.",
+      "info": "If you're still experiencing JavaScript errors, please visit the official support page for more solutions.",
+      "ok": "OK"
+    }
+  },
+  "logs": {
+    "initialized": "Application initialized successfully",
+    "installing": "Starting installation...",
+    "installSuccess": "Installation completed successfully!",
+    "installFailed": "Installation failed: {{message}}",
+    "installVersion": "Installed version: {{version}}",
+    "uninstalling": "Starting uninstallation...",
+    "uninstallSuccess": "Uninstallation completed successfully!",
+    "uninstallFailed": "Uninstallation failed: {{message}}",
+    "uninstallNoteRemoved": "Logi Options+ has been successfully removed from your system.",
+    "uninstallNoteStillInstalled": "Due to an issue with the official uninstall logic, updates to the installed version information ({{version}}) may be delayed.",
+    "scanning": "Scanning for JavaScript error files...",
+    "noCorruptedFiles": "No corrupted config files found",
+    "foundCorrupted": "Found {{count}} corrupted files",
+    "deleting": "Deleting corrupted files...",
+    "deleteSuccess": "Successfully deleted {{count}} files",
+    "scanFailed": "Scan failed: {{error}}",
+    "deleteFailed": "Delete failed: {{error}}",
+    "errorLoadingData": "Error loading data: {{error}}",
+    "error": "Error: {{error}}",
+    "refreshedInstalled": "Installed version refreshed",
+    "refreshFailedInstalled": "Failed to refresh installed version: {{error}}",
+    "refreshedLatest": "Latest version refreshed",
+    "refreshFailedLatest": "Failed to refresh latest version: {{error}}"
+  },
+  "language": {
+    "switch": "Language",
+    "en": "English",
+    "zh": "中文"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "update": "Update",
+    "autoUpdate": "Auto Check Update",
+    "updateSource": "Logi Options+ mini Update Source",
+    "updateSourceHelp": "Update Server: Global (GitHub) / China (Shanghai Server)",
+    "checkUpdate": "Check for Updates",
+    "lastCheck": "Last Check",
+    "updateAvailable": "New version available: {{version}}",
+    "download": "Download",
+    "upToDate": "You are using the latest version",
+    "updateError": "Update check failed: {{error}}",
+    "noUpdateAvailable": "No update available",
+    "appVersion": "App Version",
+    "logLevel": "Log Level",
+    "thirdPartyTool": "A third-party customized tool for Logi Options+"
+  },
+  "updatePage": {
+    "newVersion": "New Version",
+    "noReleaseNotes": "No release notes",
+    "installUpdate": "Install Update",
+    "updateAvailable": "A new version of Logi Options+ mini is available!",
+    "versionAvailable": "{{newVersion}} is now available - you have {{currentVersion}}. Would you like to download it now?"
+  }
+}

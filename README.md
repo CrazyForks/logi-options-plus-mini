@@ -24,8 +24,27 @@
 
 参考官方[Logitech Options 软件的批量安装和配置](https://prosupport.logi.com/hc/zh-cn/articles/6046882446359-Logitech-Options-软件的批量安装和配置)
 
-项目通过官方安装包命令行选项定制化Logi Options+功能。
-支持macOS原生应用、macOS Shell、Windows PowerShell。
+项目通过官方安装包命令行选项定制化 Logi Options+ 功能。
+支持 macOS 原生应用、Windows 原生应用，以及 macOS Shell / Windows PowerShell 脚本。
+
+> **免责声明**：本项目为非官方第三方工具，与 Logitech 无任何关联。Logi、Logitech、Options+ 等为 Logitech 的商标。
+
+## 仓库结构
+
+| 目录 / 文件 | 说明 |
+|-------------|------|
+| [`Logi Options Plus Mini/`](Logi%20Options%20Plus%20Mini/) | **macOS 原生应用** — SwiftUI + Xcode 工程，含 GUI 安装器、配置备份、权限检测、后台 Agent 等 |
+| [`Logi Options Plus Mini For Windows/`](Logi%20Options%20Plus%20Mini%20For%20Windows/) | **Windows 原生应用** — Tauri 2 + React + Rust，功能与 macOS 版对齐 |
+| `logi-options-plus-mini.command` | macOS 命令行安装脚本 |
+| `logi-options-plus-mini.ps1` | Windows PowerShell 安装脚本 |
+| `appcast.xml` | macOS Sparkle 自动更新源 |
+| `latest.json` | Windows Tauri 自动更新源 |
+
+### 从源码构建
+
+**macOS**：用 Xcode 打开 `Logi Options Plus Mini/Logi Options+ mini.xcodeproj`，在 Signing 中设置你的 Development Team 后构建。
+
+**Windows**：进入 `Logi Options Plus Mini For Windows/`，执行 `pnpm install && pnpm tauri dev`（开发）或 `pnpm tauri build`（发布）。详见该目录下的 [README](Logi%20Options%20Plus%20Mini%20For%20Windows/README.md)。
 
 ## 特性
 
@@ -48,13 +67,17 @@
 
 ### 使用 macOS 原生应用
 
-下载最新版本 [here](https://v.qetesh.cc/d/Public/Logi%20Options%2B%20mini.dmg)
+下载最新版本 [GitHub Releases](https://github.com/Qetesh/logi-options-plus-mini/releases/latest)
 
-[<img width="64" alt="logi option plus1" src="https://github.com/user-attachments/assets/2c57172a-b1e3-4bab-abb8-6c60425ca640" />](https://v.qetesh.cc/d/Public/Logi%20Options%2B%20mini.dmg)
+[<img width="64" alt="logi option plus1" src="https://github.com/user-attachments/assets/2c57172a-b1e3-4bab-abb8-6c60425ca640" />](https://github.com/Qetesh/logi-options-plus-mini/releases/latest)
 
 🔔 由于没有使用开发者证书签署应用，macOS可能会显示安全警告，需前往系统设置 → 隐私与安全 → 已阻止“Logi Options+mini”以保护Mac。然后点击“仍要打开”以运行该应用程序。
 
 ![WX20250305-181838@2x](https://github.com/user-attachments/assets/ca75fad3-b1e6-4b51-ba2c-f4b8e5770fb7)
+
+### 使用 Windows 原生应用
+
+从 [GitHub Releases](https://github.com/Qetesh/logi-options-plus-mini/releases/latest) 下载 Windows 安装包。源码位于 [`Logi Options Plus Mini For Windows/`](Logi%20Options%20Plus%20Mini%20For%20Windows/)，详见该目录 [README](Logi%20Options%20Plus%20Mini%20For%20Windows/README.md)。
 
 ### 使用 macOS Shell
 

@@ -23,7 +23,26 @@
 ## Project Overview
 Refer to the official [Mass installation and configuration of Logitech Options+ software](https://prosupport.logi.com/hc/en-us/articles/6046882446359-Mass-installation-and-configuration-of-Logitech-Options-software)
 
-This project customizes the Logi Options+ functionality through official installer command-line options. It supports macOS native applications, macOS Shell, and Windows PowerShell.
+This project customizes the Logi Options+ functionality through official installer command-line options. It supports macOS and Windows native apps, plus macOS Shell and Windows PowerShell scripts.
+
+> **Disclaimer**: This is an unofficial third-party tool and is not affiliated with Logitech. Logi, Logitech, and Options+ are trademarks of Logitech.
+
+## Repository Structure
+
+| Directory / File | Description |
+|------------------|-------------|
+| [`Logi Options Plus Mini/`](Logi%20Options%20Plus%20Mini/) | **macOS native app** — SwiftUI + Xcode project with GUI installer, config backup, permission checks, background Agent, and more |
+| [`Logi Options Plus Mini For Windows/`](Logi%20Options%20Plus%20Mini%20For%20Windows/) | **Windows native app** — Tauri 2 + React + Rust, feature-aligned with the macOS version |
+| `logi-options-plus-mini.command` | macOS command-line install script |
+| `logi-options-plus-mini.ps1` | Windows PowerShell install script |
+| `appcast.xml` | macOS Sparkle auto-update feed |
+| `latest.json` | Windows Tauri auto-update feed |
+
+### Build from Source
+
+**macOS**: Open `Logi Options Plus Mini/Logi Options+ mini.xcodeproj` in Xcode, set your Development Team under Signing, then build.
+
+**Windows**: `cd "Logi Options Plus Mini For Windows"`, then run `pnpm install && pnpm tauri dev` (development) or `pnpm tauri build` (release). See the [directory README](Logi%20Options%20Plus%20Mini%20For%20Windows/README.md) for details.
 
 ## Features
 
@@ -53,6 +72,10 @@ Download the latest version [here](https://github.com/Qetesh/logi-options-plus-m
 🔔 Due to the application not being signed with a developer certificate. macOS may show a security warning, simply go to System Settings → Privacy & Security → "Logi Options+mini"was blocked to protect your Mac. and click “Open Anyway” to run the app.
 
 ![WX20250305-181838@2x](https://github.com/user-attachments/assets/ca75fad3-b1e6-4b51-ba2c-f4b8e5770fb7)
+
+### Using Windows Native Application
+
+Download the Windows installer from [GitHub Releases](https://github.com/Qetesh/logi-options-plus-mini/releases/latest). Source code is in [`Logi Options Plus Mini For Windows/`](Logi%20Options%20Plus%20Mini%20For%20Windows/); see its [README](Logi%20Options%20Plus%20Mini%20For%20Windows/README.md) for details.
 
 ### Using macOS Shell
 

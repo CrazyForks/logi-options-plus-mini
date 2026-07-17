@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/Qetesh/logi-options-plus-mini/refs/heads/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>7T1+rOnRhfr2VwHjbRbQUHeqxk21bA1WujaOT6k4CS4=</string>
+</dict>
+</plist>

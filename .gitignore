@@ -1,0 +1,66 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode
+**/xcuserdata/
+*.xcuserstate
+**/xcdebugger/
+DerivedData/
+build/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods (legacy, not used by current Xcode project)
+Pods/
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+*.local
+
+# Tauri / Rust
+**/src-tauri/target/
+**/src-tauri/gen/schemas/
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.mobileprovision
+*.pem
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*.swo
+*~
+
+# OS / editor temp
+Thumbs.db
+Desktop.ini
+*.log
+*.tmp

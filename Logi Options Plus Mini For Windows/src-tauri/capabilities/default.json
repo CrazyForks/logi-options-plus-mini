@@ -1,0 +1,35 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": ["main", "settings", "update"],
+  "permissions": [
+    "core:default",
+    "core:app:default",
+    "opener:default",
+    "shell:default",
+    "shell:allow-open",
+    "dialog:default",
+    "dialog:allow-message",
+    "dialog:allow-ask",
+    "dialog:allow-confirm",
+    "fs:default",
+    "fs:allow-read-text-file",
+    "fs:allow-write-text-file",
+    "fs:allow-exists",
+    "fs:allow-create",
+    "fs:allow-remove",
+    "fs:allow-rename",
+    "fs:allow-copy-file",
+    "updater:default",
+    "process:default",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        "$TEMP/**",
+        "$LOCALAPPDATA/**",
+        "$APPDATA/**"
+      ]
+    }
+  ]
+}
