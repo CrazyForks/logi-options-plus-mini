@@ -3,6 +3,44 @@
     <channel>
         <title>Logi Options+ mini</title>
         <item>
+            <title>1.9.0</title>
+            <pubDate>Fri, 17 Jul 2026 12:00:00 +0800</pubDate>
+            <sparkle:version>19</sparkle:version>
+            <sparkle:shortVersionString>1.9.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/Qetesh/logi-options-plus-mini/releases/download/v1.9.0/Logi.Options+.mini.dmg" length="3774851" type="application/octet-stream" sparkle:edSignature="Ck/us2p5gWDf8iT6vrqxDWuT2Kdj0jiio39+yutMgwSlM0ggdqsrm6JhxZmzYaDDafhKD1lJX0FtGQj2GDqVDg=="/>
+            <description>
+                <![CDATA[
+                    <style>
+                    ul {
+                        margin-top: 0;
+                        margin-bottom: 7px;
+                        padding-left: 18px;
+                    }
+                    </style>
+
+                    <h4>🎉 Logi Options+ mini 1.9 is now available!</h4>
+                    <p style="color:#888;font-size:12px;margin:0 0 8px;">Released: 2026-07-18</p>
+                    <ul>
+                        <li>Improved version checking logic</li>
+                        <li>Bug fixes and general improvements</li>
+                    </ul>
+
+                    <hr>
+
+                    <h4>🔄 Recent Updates:</h4>
+                    <ul>
+                        <li>Updated compatibility with the latest Logi Options+ installer and macOS 26</li>
+                        <li>Improved installation progress, permission checking, and startup error repair</li>
+                        <li>Improved Activity Log animations, drag-to-dismiss behavior, and visual stability</li>
+                        <li>Added Chinese language support and automatic installer region detection</li>
+                        <li>Added a background service to reduce repeated password prompts</li>
+                        <li>Added Actions Ring, quiet installation, and log level settings</li>
+                    </ul>
+                ]]>
+            </description>
+        </item>
+        <item>
             <title>1.8</title>
             <pubDate>Sat, 10 Jan 2026 14:12:57 +0800</pubDate>
             <sparkle:version>18</sparkle:version>

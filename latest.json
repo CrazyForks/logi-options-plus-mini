@@ -1,11 +1,11 @@
 {
-  "version": "v1.8.2",
-  "notes": "v1.8.2\n🎉 修复因设置窗口、更新窗口导致的，应用退出后仍遗留后台进程的问题。\nFixed an issue where background processes could remain after the app exited due to the Settings or Update window.",
-  "pub_date": "2026-03-09T11:55:50.52Z",
+  "version": "v1.9.0",
+  "notes": "v1.9.0\n🎉 Improved version checking logic.\nBug fixes and general improvements.\n\n🔄 Recent Updates:\nFixed an issue where background processes could remain after the app exited due to the Settings or Update window.",
+  "pub_date": "2026-07-18T12:00:00.00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTTDdqaVJKVDYwWm04KzBLVnc1MWlBak9nbEJINHBibFF3anVLOHIyMy9vZkMvQ1NVUUNnVjJDOU5XRGMwamRsaUt1RW1ibWQ5R3BlN1FyQThaZVM1Um55dW1CRGlEOWdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzczMDI4MDIxCWZpbGU6TG9naSBPcHRpb25zKyBtaW5pXzEuOC4yX3g2NC1zZXR1cC5leGUKSVZPQ3RFeWdxVUVjTVUwbWg5RDdEN3J0ckdMeGl0WmdsRUtTOE5RRGFUOGNBWjFLOUxacFRXZFlQektOVUJMelVPN05RY1Nxblp3QUlXMGZsWTdVRGc9PQo=",
-      "url": "https://github.com/Qetesh/logi-options-plus-mini/releases/download/v1.8.2/Logi.Options+.mini_1.8.2_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTTDdqaVJKVDYwWnI0Znh5andOcEc5d09XaWtrNFZTSUt6SFlBNlFCa250TGFwTEI4cUgyVlRKYjZueU5wVll2UkJaTktHOWI2MkxJVVZ6cHNBNyt0R1BLTk0yd3MxT0FjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0MzUxNTQ5CWZpbGU6TG9naSBPcHRpb25zKyBtaW5pXzEuOS4wX3g2NC1zZXR1cC5leGUKVGFUWHRhK2YwcmhXM0I1T0FhL0JRNUdNWHFSbGFyOHZVdGFSalUwT2tWbmlOVnNFN2JPalhKK29vVS9SOXRuMk1Vblp6eDBtYmYxbnNSUlBYZyszREE9PQo=",
+      "url": "https://github.com/Qetesh/logi-options-plus-mini/releases/download/v1.9.0/Logi.Options+.mini_1.9.0_x64-setup.exe"
     }
   }
 }
