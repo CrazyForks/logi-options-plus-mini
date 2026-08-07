@@ -18,6 +18,7 @@ class InstallerController: NSObject, ObservableObject {
     @Published var systemLog: String = ""
     @Published var installedVersion: String = ""
     @Published var currentStep: InstallationStep = .idle
+    @Published var downloadProgress: Double = 0
     @Published var failedAtStep: InstallationStep? = nil  // Track which step failed
     @Published var showActivityLog: Bool = false
     @Published var operationMode: OperationMode = .idle
@@ -52,8 +53,18 @@ class InstallerController: NSObject, ObservableObject {
     }
 
     func install() async {
+        await install(using: .installer)
+    }
+
+    func installOffline() async {
+        await install(using: .offlineInstaller)
+    }
+
+    private func install(using downloadType: DownloadType) async {
         // Set operation mode
         operationMode = .install
+        failedAtStep = nil
+        downloadProgress = 0
         
         // Generate selectedFeaturesString
         let selectedFeaturesString = generateFeatureArgumentString()
@@ -63,11 +74,11 @@ class InstallerController: NSObject, ObservableObject {
         do {
             // Step 1: Download the installer
             currentStep = .downloading
-            try await downloader.downloadInstaller()
+            try await downloadInstaller(type: downloadType)
             
             // Step 2: Unzip the installer
             currentStep = .extracting
-            try await unzipper.unzipInstaller()
+            try await unzipper.unzipInstaller(type: downloadType)
             
             // Step 3: Backup configuration files
             currentStep = .backup
@@ -75,7 +86,7 @@ class InstallerController: NSObject, ObservableObject {
             
             // Step 4: Uninstall
             currentStep = .uninstalling
-            try await installerRunner.runInstaller(selectedFeatures: "--uninstall")
+            try await installerRunner.runInstaller(selectedFeatures: "--uninstall", type: downloadType)
             updateInstalledVersion()
             
             // Step 5: Restore configuration
@@ -84,7 +95,7 @@ class InstallerController: NSObject, ObservableObject {
             
             // Step 6: Install
             currentStep = .installing
-            try await installerRunner.runInstaller(selectedFeatures: selectedFeaturesString)
+            try await installerRunner.runInstaller(selectedFeatures: selectedFeaturesString, type: downloadType)
             updateInstalledVersion()
             
             // Step 7: Verify installation and complete
@@ -112,23 +123,29 @@ class InstallerController: NSObject, ObservableObject {
     }
     
     func uninstall() async {
+        await uninstall(using: .installer)
+    }
+
+    private func uninstall(using downloadType: DownloadType) async {
         // Set operation mode
         operationMode = .uninstall
+        failedAtStep = nil
+        downloadProgress = 0
         
         Logger.app.info("\(String(localized: "Starting uninstallation..."))")
         
         do {
             // Step 1: Download the installer (needed for uninstall command)
             currentStep = .downloading
-            try await downloader.downloadInstaller()
+            try await downloadInstaller(type: downloadType)
             
             // Step 2: Unzip the installer
             currentStep = .extracting
-            try await unzipper.unzipInstaller()
+            try await unzipper.unzipInstaller(type: downloadType)
             
             // Step 3: Uninstall without backup
             currentStep = .uninstalling
-            try await installerRunner.runInstaller(selectedFeatures: "--uninstall")
+            try await installerRunner.runInstaller(selectedFeatures: "--uninstall", type: downloadType)
             updateInstalledVersion()
             
             // Completed
@@ -151,13 +168,15 @@ class InstallerController: NSObject, ObservableObject {
     func fix() async {
         // Set operation mode
         operationMode = .fix
+        failedAtStep = nil
+        downloadProgress = 0
         
         Logger.app.info("\(String(localized: "Starting fix..."))")
         
         do {
             // Step 1: Download the patch
             currentStep = .downloading
-            try await downloader.downloadInstaller(type: .patch)
+            try await downloadInstaller(type: .patch)
             
             // Step 2: Unzip the patch
             currentStep = .extracting
@@ -182,6 +201,15 @@ class InstallerController: NSObject, ObservableObject {
         }
         
         Logger.app.info("🎉\(String(localized: "Fix completed"))\n")
+    }
+
+    private func downloadInstaller(type: DownloadType) async throws {
+        try await downloader.downloadInstaller(type: type) { [weak self] progress in
+            Task { @MainActor in
+                self?.downloadProgress = progress
+            }
+        }
+        downloadProgress = 1
     }
     
     func saveSelectedFeatures() {
@@ -214,6 +242,9 @@ class InstallerController: NSObject, ObservableObject {
             }
         } catch {
             Logger.app.error("\(String(localized: "Scan failed")): \(error.localizedDescription)")
+            if isPermissionDenied(error) {
+                PermissionChecker.shared.showPermissionWindow()
+            }
         }
     }
     
@@ -233,6 +264,9 @@ class InstallerController: NSObject, ObservableObject {
             failedAtStep = currentStep
             currentStep = .failed
             Logger.app.error("\(String(localized: "JavaScript error fix failed")): \(error.localizedDescription)")
+            if isPermissionDenied(error) {
+                PermissionChecker.shared.showPermissionWindow()
+            }
             return
         }
         

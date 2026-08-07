@@ -14,8 +14,9 @@ struct LogiOptionsPlusInstallerApp: App {
             return UILogHandler(logStore: store)
         }
         
-        // Initialize UpdaterManager singleton (triggers Sparkle setup)
-        _ = UpdaterManager.shared
+        // Initialize and start the shared updater after its initial server is resolved.
+        let updaterManager = UpdaterManager.shared
+        updaterManager.start()
         
         AgentManager.shared.checkAgentStatus()
         
@@ -25,13 +26,13 @@ struct LogiOptionsPlusInstallerApp: App {
     
     /// 启动时检查更新的私有方法
     private func checkForUpdatesOnStartup() {
-        let updater = UpdaterManager.shared.updater
+        let updaterManager = UpdaterManager.shared
         
         // 延迟检查，让应用完全启动后再执行
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            if updater.automaticallyChecksForUpdates {
+            if updaterManager.updater.automaticallyChecksForUpdates {
                 Logger.app.debug("\(String(localized: "Checking for updates in background..."))")
-                updater.checkForUpdatesInBackground()
+                updaterManager.checkForUpdatesInBackground()
             } else {
                 Logger.app.debug("\(String(localized: "Skipping update check, reason: user did not enable automatic updates"))")
             }
@@ -57,7 +58,7 @@ struct LogiOptionsPlusInstallerApp: App {
                 AboutCommandView()
             }
             CommandGroup(after: .appInfo) {
-                CheckForUpdatesView(updater: UpdaterManager.shared.updater)
+                CheckForUpdatesView(updaterManager: UpdaterManager.shared)
             }
         }
         

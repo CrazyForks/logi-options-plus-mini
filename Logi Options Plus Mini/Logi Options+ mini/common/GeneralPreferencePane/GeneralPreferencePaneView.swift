@@ -49,15 +49,6 @@ struct GeneralPreferencePane: View {
             GroupBox(label: Text("App helper")) {
                 VStack(alignment: .leading) {
                     HStack {
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(agentManager.isAgentInstalled ? .green : .gray)
-                            .help("App helper status")
-                            .onTapGesture {
-//                                agentManager.checkAgentStatus()
-                                agentManager.checkAgentRunningStatus()
-                            }
-                                                
                         // 根据 Agent 状态显示相应按钮
                         if isAgentOperationInProgress {
                             ProgressView()
@@ -77,11 +68,25 @@ struct GeneralPreferencePane: View {
 
                     }
                     
-                    Text("Let the app do tasks without asking for your password every time.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: 300, alignment: .leading)
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Circle()
+                            .frame(width: 10, height: 10)
+                            .foregroundColor(agentManager.isAgentInstalled ? .green : .gray)
+                            .help("App helper status")
+                            .alignmentGuide(.firstTextBaseline) { dimensions in
+                                dimensions[.bottom] - 2
+                            }
+                            .onTapGesture {
+//                                agentManager.checkAgentStatus()
+                                agentManager.checkAgentRunningStatus()
+                            }
+
+                        Text("Let the app do tasks without asking for your password every time.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(width: 300, alignment: .leading)
                 }
             }
             .groupBoxStyle(PreferencesGroupBoxStyle())

@@ -6,10 +6,13 @@ struct AboutView: View {
     @ObservedObject private var checkForUpdatesViewModel: CheckForUpdatesViewModel
     @State private var trigger: Int = 0
 
+    private let updaterManager: UpdaterManager
     private let updater: SPUUpdater
     
     init() {
-        self.updater = UpdaterManager.shared.updater
+        let updaterManager = UpdaterManager.shared
+        self.updaterManager = updaterManager
+        self.updater = updaterManager.updater
         self.checkForUpdatesViewModel = CheckForUpdatesViewModel(updater: updater)
     }
     
@@ -41,7 +44,7 @@ struct AboutView: View {
             }
             .buttonStyle(LinkButtonStyle())
             
-            Button("Check for Updates", action: updater.checkForUpdates)
+            Button("Check for Updates", action: updaterManager.checkForUpdates)
                 .disabled(!checkForUpdatesViewModel.canCheckForUpdates)
                 .buttonStyle(DefaultButtonStyle())
         }

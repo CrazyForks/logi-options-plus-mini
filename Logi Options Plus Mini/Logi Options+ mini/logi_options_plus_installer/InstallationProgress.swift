@@ -83,6 +83,7 @@ struct ProgressNode: View {
     let failedAtStep: InstallationStep?
     let isActive: Bool
     let isCompleted: Bool
+    let downloadProgress: Double
     
     @State private var pulseAnimation = false
     
@@ -107,9 +108,27 @@ struct ProgressNode: View {
                 Circle()
                     .fill(nodeColor.opacity(0.2))
                     .frame(width: 32, height: 32)
+
+                // The download node uses a thin outer ring for actual byte progress.
+                if step == .downloading && isActive && currentStep != .failed {
+                    Circle()
+                        .stroke(nodeColor.opacity(0.15), lineWidth: 2.5)
+                        .frame(width: 42, height: 42)
+
+                    Circle()
+                        .trim(from: 0, to: min(max(downloadProgress, 0), 1))
+                        .stroke(
+                            nodeColor,
+                            style: StrokeStyle(lineWidth: 2.5, lineCap: .round)
+                        )
+                        .frame(width: 42, height: 42)
+                        .rotationEffect(.degrees(-90))
+                        .shadow(color: nodeColor.opacity(0.35), radius: 1)
+                        .animation(.linear(duration: 0.15), value: downloadProgress)
+                }
                 
                 // Active pulse animation
-                if isActive && currentStep != .failed {
+                if isActive && currentStep != .failed && step != .downloading {
                     Circle()
                         .stroke(nodeColor, lineWidth: 2)
                         .frame(width: 32, height: 32)
@@ -241,7 +260,8 @@ struct InstallationProgressView: View {
                     currentStep: controller.currentStep,
                     failedAtStep: controller.failedAtStep,
                     isActive: isActive,
-                    isCompleted: isCompleted
+                    isCompleted: isCompleted,
+                    downloadProgress: controller.downloadProgress
                 )
                 .frame(width: 50)
                 

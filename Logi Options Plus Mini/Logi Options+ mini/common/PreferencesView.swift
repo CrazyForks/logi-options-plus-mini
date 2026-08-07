@@ -18,11 +18,17 @@ struct PreferencesView: View {
                 }
                 .tag(0)
 
+            DownloadSourcePreferencePane()
+                .tabItem {
+                    Label("Download Source", systemImage: "arrow.down.circle")
+                }
+                .tag(1)
+
             UpdatesPreferencePane()
                 .tabItem {
                     Label("Updates", systemImage: "arrow.triangle.2.circlepath.circle")
                 }
-                .tag(1)
+                .tag(2)
         }
         .padding(20)
         .frame(minWidth: 500)
