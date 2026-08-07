@@ -28,6 +28,7 @@
   "buttons": {
     "install": "安装/更新",
     "uninstall": "卸载",
+    "offlineInstall": "离线版安装/更新",
     "fix": "修复 ▼"
   },
   "fix": {
@@ -70,12 +71,13 @@
     "installing": "开始安装...",
     "installSuccess": "安装成功！",
     "installFailed": "安装失败：{{message}}",
+    "offlineInstalling": "开始离线版安装/更新...",
+    "offlineInstallSuccess": "离线版安装/更新成功！",
+    "offlineInstallFailed": "离线版安装/更新失败：{{message}}",
     "installVersion": "已安装版本：{{version}}",
     "uninstalling": "开始卸载...",
-    "uninstallSuccess": "卸载成功！",
     "uninstallFailed": "卸载失败：{{message}}",
     "uninstallNoteRemoved": "Logi Options+ 已成功从系统中移除。",
-    "uninstallNoteStillInstalled": "由于官方卸载逻辑问题，已安装版本（{{version}}）的信息更新可能会有延迟",
     "scanning": "正在扫描 JavaScript 错误文件...",
     "noCorruptedFiles": "未找到损坏的配置文件",
     "foundCorrupted": "发现 {{count}} 个损坏文件",
@@ -101,7 +103,11 @@
     "update": "更新",
     "autoUpdate": "自动检查更新",
     "updateSource": "Logi Options+ mini 更新源",
-    "updateSourceHelp": "选择更新服务器：Global（GitHub） / China（上海服务器）",
+    "updateSourceAuto": "自动",
+    "updateSourceHelp": "选择更新服务器：自动（按地区检测）/ Global（GitHub） / China（上海服务器）",
+    "downloadSource": "下载源",
+    "downloadSourceHelp": "安装/卸载时下载安装包的地址：自动（按地区检测）/ Global / China。选择 Global 或 China 时不进行地区检测",
+    "downloadSourceAuto": "自动",
     "checkUpdate": "检查更新",
     "lastCheck": "上次检查",
     "updateAvailable": "发现新版本：{{version}}",
@@ -117,6 +123,8 @@
     "newVersion": "新版本",
     "noReleaseNotes": "暂无更新说明",
     "installUpdate": "安装更新",
+    "downloadingUpdate": "正在下载更新…",
+    "installingUpdate": "正在安装更新…",
     "updateAvailable": "Logi Options+ mini 新版本已发布！",
     "versionAvailable": "{{newVersion}} 现已发布，您当前的版本是 {{currentVersion}}。是否立即下载？"
   }

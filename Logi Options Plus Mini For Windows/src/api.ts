@@ -17,10 +17,14 @@ export async function getVersionInfo(): Promise<VersionInfo> {
   return invoke<VersionInfo>('get_version_info');
 }
 
-export async function install(selectedFeatures: [string, boolean][]): Promise<InstallResult> {
-  return invoke<InstallResult>('install', { selectedFeatures });
+export async function install(selectedFeatures: [string, boolean][], source?: string): Promise<InstallResult> {
+  return invoke<InstallResult>('install', { selectedFeatures, source: source ?? null });
 }
 
-export async function uninstall(): Promise<InstallResult> {
-  return invoke<InstallResult>('uninstall');
+export async function uninstall(source?: string): Promise<InstallResult> {
+  return invoke<InstallResult>('uninstall', { source: source ?? null });
+}
+
+export async function installOffline(selectedFeatures: [string, boolean][], source?: string): Promise<InstallResult> {
+  return invoke<InstallResult>('install_offline', { selectedFeatures, source: source ?? null });
 }

@@ -2,14 +2,16 @@
  * 打开更新窗口
  * @param version 新版本号
  * @param body 更新内容
+ * @param source 更新源（'global' | 'china'），用于安装时复用同一 endpoint
  */
-export async function openUpdateWindow(version: string, body: string): Promise<void> {
+export async function openUpdateWindow(version: string, body: string, source?: string): Promise<void> {
   try {
     const { WebviewWindow } = await import('@tauri-apps/api/webviewWindow');
-    const isDev = window.location.hostname === 'localhost';
-    const url = isDev
-      ? `http://localhost:1420/update.html?version=${encodeURIComponent(version)}&body=${encodeURIComponent(body)}`
-      : `update.html?version=${encodeURIComponent(version)}&body=${encodeURIComponent(body)}`;
+    const query = new URLSearchParams({ version, body });
+    if (source) {
+      query.set('source', source);
+    }
+    const url = `update.html?${query.toString()}`;
 
     const existing = await WebviewWindow.getByLabel('update');
     if (existing) {

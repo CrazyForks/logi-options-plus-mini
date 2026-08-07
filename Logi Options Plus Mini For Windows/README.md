@@ -105,4 +105,4 @@ pnpm tauri build
 
 - [Logi Options+ 官方支持](https://support.logi.com/hc/zh-cn/articles/37493733117847-Options-and-G-HUB-macOS-Certificate-Issue)
 - [Tauri 官方文档](https://tauri.app/v1/guides/)
-- [Logi Options+ 更新 API](https://updates.optionsplus.logitechg.com/pipeline/v2/update/optionsplus5/win/public/update.json)
+- [Logi Options+ 更新 API](https://updates.optionsplus.logitechg.com/pipeline/v2/update/optionsplus4/osx/public/update.json)

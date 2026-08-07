@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getVersion } from '@tauri-apps/api/app';
 import { invoke } from '@tauri-apps/api/core';
-import { Globe, RefreshCw, FileText, CheckCircle, XCircle, Loader2, Server } from 'lucide-react';
+import { Globe, RefreshCw, FileText, CheckCircle, XCircle, Loader2, Server, Download } from 'lucide-react';
 import { openUpdateWindow } from '../utils';
 import { getUpdateEndpoint } from '../config/updateSource';
 import '../App.css';
@@ -23,7 +23,10 @@ function Settings() {
     return localStorage.getItem('logLevel') || 'info';
   });
   const [updateSource, setUpdateSource] = useState(() => {
-    return localStorage.getItem('updateSource') || 'global';
+    return localStorage.getItem('updateSource') || 'auto';
+  });
+  const [downloadSource, setDownloadSource] = useState(() => {
+    return localStorage.getItem('downloadSource') || 'auto';
   });
 
   useEffect(() => {
@@ -55,19 +58,32 @@ function Settings() {
     localStorage.setItem('updateSource', source);
   };
 
+  const handleDownloadSourceChange = (source: string) => {
+    setDownloadSource(source);
+    localStorage.setItem('downloadSource', source);
+    // 通知其他窗口（主窗口据此选择下载地址）
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'downloadSource',
+      newValue: source
+    }));
+  };
+
   const handleCheckUpdate = async () => {
     setCheckingUpdate(true);
     setUpdateStatus('idle');
     setUpdateError('');
 
     try {
-      const endpoint = getUpdateEndpoint(updateSource as 'global' | 'china');
+      const endpoint = getUpdateEndpoint(updateSource as 'auto' | 'global' | 'china');
 
-      const result = await invoke<string | null>('check_update_with_endpoint', { endpoint });
+      const result = await invoke<string | null>('check_update_with_endpoint', {
+        source: updateSource,
+        endpoint,
+      });
 
       if (result) {
         const [version, body] = result.split('|');
-        await openUpdateWindow(version, body);
+        await openUpdateWindow(version, body, updateSource);
       } else {
         setUpdateStatus('up-to-date');
       }
@@ -140,6 +156,28 @@ function Settings() {
               className="language-select"
               title={t('settings.updateSourceHelp')}
             >
+              <option value="auto">{t('settings.updateSourceAuto')}</option>
+              <option value="global">Global</option>
+              <option value="china">China</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="settings-divider"></div>
+
+        <div className="settings-row">
+          <div className="settings-item">
+            <Download size={16} />
+            <span>{t('settings.downloadSource')}</span>
+          </div>
+          <div className="settings-control">
+            <select
+              value={downloadSource}
+              onChange={(e) => handleDownloadSourceChange(e.target.value)}
+              className="language-select"
+              title={t('settings.downloadSourceHelp')}
+            >
+              <option value="auto">{t('settings.downloadSourceAuto')}</option>
               <option value="global">Global</option>
               <option value="china">China</option>
             </select>

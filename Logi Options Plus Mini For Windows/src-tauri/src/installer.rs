@@ -33,7 +33,7 @@ pub struct Installer {
 
 impl Installer {
     pub fn new() -> Self {
-        let temp_dir = std::env::temp_dir().join("logi_options_plus");
+        let temp_dir = std::env::temp_dir().join("logi_options_plus_mini");
 
         // Create temp directory if not exists (use std::fs for sync creation in constructor)
         std::fs::create_dir_all(&temp_dir).ok();
@@ -49,13 +49,15 @@ impl Installer {
         &mut self,
         app: tauri::AppHandle,
         selected_features: Vec<(String, bool)>,
+        source: Option<String>,
     ) -> Result<InstallResult, String> {
         emit_log_internal(&app, "Starting installation process...", "info");
 
-        // Step 1: Detect region
-        self.downloader.detect_region_with_app(&app).await?;
+        // Step 1: Detect region (or use manually chosen download source)
+        self.downloader.detect_region_with_app(&app, source.as_deref()).await?;
 
         // Step 2: Download installer
+        self.prepare_temp_dir(&app);
         emit_log_internal(&app, "Step 1/5: Downloading installer...", "info");
         let installer_path = self
             .downloader
@@ -86,6 +88,9 @@ impl Installer {
         // Get installed version
         let version = get_installed_version_with_app(Some(&app));
 
+        // Clean up temp directory after successful installation
+        self.remove_temp_dir(&app);
+
         emit_log_internal(&app, "Installation completed successfully!", "info");
         Ok(InstallResult {
             success: true,
@@ -94,24 +99,83 @@ impl Installer {
         })
     }
 
-    pub async fn uninstall(&mut self, app: tauri::AppHandle) -> Result<InstallResult, String> {
+    pub async fn install_offline(
+        &mut self,
+        app: tauri::AppHandle,
+        selected_features: Vec<(String, bool)>,
+        source: Option<String>,
+    ) -> Result<InstallResult, String> {
+        emit_log_internal(&app, "Starting offline installation process...", "info");
+
+        // Step 1: Detect region (or use manually chosen download source)
+        self.downloader.detect_region_with_app(&app, source.as_deref()).await?;
+
+        // Step 2: Download offline installer
+        self.prepare_temp_dir(&app);
+        emit_log_internal(&app, "Step 1/5: Downloading offline installer...", "info");
+        let installer_path = self
+            .downloader
+            .download_offline_installer_with_app(&app, &self.temp_dir)
+            .await?;
+
+        // Step 3: Backup configuration
+        emit_log_internal(&app, "Step 2/5: Backing up configuration...", "info");
+        if let Err(e) = self.backup_manager.backup(&app).await {
+            emit_log_internal(&app, &format!("Failed to backup config: {}", e), "error");
+        }
+
+        // Step 4: Uninstall existing version
+        emit_log_internal(&app, "Step 3/5: Uninstalling existing version...", "info");
+        self.uninstall_internal(&app, &installer_path).await?;
+
+        // Step 5: Restore configuration
+        emit_log_internal(&app, "Step 4/5: Restoring configuration...", "info");
+        if let Err(e) = self.backup_manager.restore(&app).await {
+            emit_log_internal(&app, &format!("Failed to restore config: {}", e), "error");
+        }
+
+        // Step 6: Install new version
+        emit_log_internal(&app, "Step 5/5: Installing new version...", "info");
+        self.install_internal(&app, &installer_path, &selected_features)
+            .await?;
+
+        // Get installed version
+        let version = get_installed_version_with_app(Some(&app));
+
+        // Clean up temp directory after successful offline installation
+        self.remove_temp_dir(&app);
+
+        emit_log_internal(&app, "Offline installation completed successfully!", "info");
+        Ok(InstallResult {
+            success: true,
+            message: "Offline installation completed successfully!".to_string(),
+            version: Some(version),
+        })
+    }
+
+    pub async fn uninstall(
+        &mut self,
+        app: tauri::AppHandle,
+        source: Option<String>,
+    ) -> Result<InstallResult, String> {
         emit_log_internal(&app, "Starting uninstall process...", "info");
 
         // Download installer (needed for uninstall command)
-        self.downloader.detect_region_with_app(&app).await?;
+        self.downloader.detect_region_with_app(&app, source.as_deref()).await?;
+        self.prepare_temp_dir(&app);
         let installer_path = self
             .downloader
             .download_installer_with_app(&app, &self.temp_dir)
             .await?;
 
-        // Uninstall
+        // Uninstall (uninstall_internal now waits for the registry to reflect
+        // the removal, so this applies to both install-time and standalone flows)
         self.uninstall_internal(&app, &installer_path).await?;
 
-        // Wait for uninstaller to complete and registry to be updated
-        emit_log_internal(&app, "Waiting for cleanup to complete...", "info");
-        tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-
         let version = get_installed_version_with_app(Some(&app));
+
+        // Clean up temp directory after successful uninstallation
+        self.remove_temp_dir(&app);
 
         emit_log_internal(&app, "Uninstallation completed successfully!", "info");
         Ok(InstallResult {
@@ -119,6 +183,68 @@ impl Installer {
             message: "Uninstallation completed successfully!".to_string(),
             version: Some(version),
         })
+    }
+
+    /// Remove the temporary working directory.
+    /// Safe to call when the directory does not exist (skipped) or removal
+    /// fails (logged as a warning, does not propagate).
+    fn remove_temp_dir(&self, app: &tauri::AppHandle) {
+        if !self.temp_dir.exists() {
+            emit_log_internal(
+                app,
+                &format!(
+                    "Temp directory not found, skipping cleanup: {}",
+                    self.temp_dir.display()
+                ),
+                "debug",
+            );
+            return;
+        }
+
+        match std::fs::remove_dir_all(&self.temp_dir) {
+            Ok(()) => {
+                emit_log_internal(
+                    app,
+                    &format!(
+                        "Temp directory cleaned up: {}",
+                        self.temp_dir.display()
+                    ),
+                    "info",
+                );
+            }
+            Err(e) => {
+                emit_log_internal(
+                    app,
+                    &format!(
+                        "Failed to clean up temp directory {}: {}",
+                        self.temp_dir.display(),
+                        e
+                    ),
+                    "warn",
+                );
+            }
+        }
+    }
+
+    /// Clean (remove) the temp directory before downloading, then recreate it.
+    /// This ensures stale files from previous runs don't interfere with the
+    /// new download. Safe against a missing directory.
+    fn prepare_temp_dir(&self, app: &tauri::AppHandle) {
+        // Remove any stale temp directory from a previous run
+        self.remove_temp_dir(app);
+
+        // Recreate the temp directory for the upcoming download
+        if let Err(e) = std::fs::create_dir_all(&self.temp_dir) {
+            emit_log_internal(
+                app,
+                &format!(
+                    "Failed to create temp directory {}: {}",
+                    self.temp_dir.display(),
+                    e
+                ),
+                "error",
+            );
+        }
     }
 
     async fn uninstall_internal(
@@ -141,7 +267,52 @@ impl Installer {
             // We continue anyway
         }
 
+        // Wait for the uninstaller to actually finish by polling the registry
+        // until the application is no longer detected as installed.
+        // This ensures both install-time and standalone uninstalls confirm
+        // completion the same way.
+        self.wait_for_uninstall_complete(app).await;
+
         Ok(())
+    }
+
+    /// Poll the registry (and filesystem) until the application is no longer
+    /// detected as installed, confirming the uninstall process has finished.
+    async fn wait_for_uninstall_complete(&self, app: &tauri::AppHandle) {
+        const MAX_ATTEMPTS: u32 = 120; // up to ~120s
+        const POLL_INTERVAL: std::time::Duration = std::time::Duration::from_secs(1);
+
+        emit_log_internal(
+            app,
+            "Waiting for uninstall to complete (polling registry)...",
+            "info",
+        );
+
+        for attempt in 1..=MAX_ATTEMPTS {
+            tokio::time::sleep(POLL_INTERVAL).await;
+
+            let status = get_installed_version_with_app(Some(app));
+            if status == "not installed" {
+                emit_log_internal(
+                    app,
+                    &format!("Uninstall confirmed complete after {} attempt(s)", attempt),
+                    "info",
+                );
+                return;
+            }
+
+            emit_log_internal(
+                app,
+                &format!("Still uninstalling... (attempt {}, status: {})", attempt, status),
+                "debug",
+            );
+        }
+
+        emit_log_internal(
+            app,
+            "Uninstall wait timed out after polling; continuing anyway.",
+            "warn",
+        );
     }
 
     async fn install_internal(
