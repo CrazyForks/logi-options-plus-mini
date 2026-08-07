@@ -3,6 +3,49 @@
     <channel>
         <title>Logi Options+ mini</title>
         <item>
+            <title>2.0.0</title>
+            <pubDate>Fri, 07 Aug 2026 12:00:00 +0800</pubDate>
+            <sparkle:version>20</sparkle:version>
+            <sparkle:shortVersionString>2.0.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/Qetesh/logi-options-plus-mini/releases/download/v2.0.0/Logi.Options+.mini.dmg" length="3880758" type="application/octet-stream" sparkle:edSignature="5cQ6H5La7/NIODq8UbmT51FITi3OkYcgcpyDEsZlcCVkMY30KhoLi+fjX26FUiPnQ0Kq/HS/dCnqP0BoQrbjBQ=="/>
+            <description>
+                <![CDATA[
+                    <style>
+                    ul {
+                        margin-top: 0;
+                        margin-bottom: 7px;
+                        padding-left: 18px;
+                    }
+                    </style>
+
+                    <h4>🎉 Logi Options+ mini 2.0 is now available!</h4>
+                    <p style="color:#888;font-size:12px;margin:0 0 8px;">Released: 2026-08-07</p>
+                    <ul>
+                        <li>The app is signed and notarized.</li>
+                        <li>Added offline installation support with download progress tracking</li>
+                        <li>Added download source preference for installer downloads</li>
+                        <li>Enhanced updater functionality and expanded Chinese localization</li>
+                        <li>Improved permission guidance, error handling, and XPC connection security</li>
+                        <li>Refined UI layout, button styling, and tool button colors</li>
+                    </ul>
+
+                    <hr>
+
+                    <h4>🔄 Recent Updates:</h4>
+                    <ul>
+                        <li>Improved version checking logic</li>
+                        <li>Updated compatibility with the latest Logi Options+ installer and macOS 26</li>
+                        <li>Improved installation progress, permission checking, and startup error repair</li>
+                        <li>Improved Activity Log animations, drag-to-dismiss behavior, and visual stability</li>
+                        <li>Added Chinese language support and automatic installer region detection</li>
+                        <li>Added a background service to reduce repeated password prompts</li>
+                        <li>Added Actions Ring, quiet installation, and log level settings</li>
+                    </ul>
+                ]]>
+            </description>
+        </item>
+        <item>
             <title>1.9.0</title>
             <pubDate>Fri, 17 Jul 2026 12:00:00 +0800</pubDate>
             <sparkle:version>19</sparkle:version>
