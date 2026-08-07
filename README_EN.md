@@ -3,16 +3,13 @@
 
 **Logi Options+ mini** Provides an option to customize Logi Options+ so that the user can better control its functions.
 
-🎉 Logi Options+ Mini for Windows is now available! Welcome to [download](https://github.com/Qetesh/logi-options-plus-mini/releases) it￼, try it out, and share any issues or suggestions ❤️
-
-<img width="600" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
-
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/11adddd4-bf0e-4e6d-b164-483b2521e228">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/86024914-4650-4966-ba81-77d59fee5696">
   <img alt="Logi Options+ mini" src="https://github.com/user-attachments/assets/86024914-4650-4966-ba81-77d59fee5696" width="600" > 
 </picture>
+
+<img width="600" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
 
 <img width="600" alt="image" src="https://github.com/Qetesh/logi-options-plus-mini/assets/4559341/d4c503a9-51d8-4a18-af90-a3f3be508e8b">
 <img width="600" alt="image" src="https://github.com/Qetesh/logi-options-plus-mini/assets/4559341/14a85961-b022-4fc9-99bf-6e30b071f54c">
@@ -47,7 +44,9 @@ This project customizes the Logi Options+ functionality through official install
 ## Features
 
 - customizes the Logi Options+ functionality
+- Smooth interactive UX
 - Automatically retain configuration when uninstalling and upgrading
+- Supports the Logi Options+ offline installer package
 - Customizable features:
   - analytics: user sharing of application usage and diagnostic data
   - flow
@@ -68,10 +67,6 @@ This project customizes the Logi Options+ functionality through official install
 Download the latest version [here](https://github.com/Qetesh/logi-options-plus-mini/releases/latest)
 
 [<img width="64" alt="logi option plus1" src="https://github.com/user-attachments/assets/2c57172a-b1e3-4bab-abb8-6c60425ca640" />](https://github.com/Qetesh/logi-options-plus-mini/releases/latest)
-
-🔔 Due to the application not being signed with a developer certificate. macOS may show a security warning, simply go to System Settings → Privacy & Security → "Logi Options+mini"was blocked to protect your Mac. and click “Open Anyway” to run the app.
-
-![WX20250305-181838@2x](https://github.com/user-attachments/assets/ca75fad3-b1e6-4b51-ba2c-f4b8e5770fb7)
 
 ### Using Windows Native Application
 

@@ -4,15 +4,13 @@
 
 **Logi Options+ mini** 提供了一种选择来自定义 Logi Options+，方便用户能够更好地控制其功能。
 
-🎉 Logi Options+ mini for Windows 版本发布！欢迎大家[下载](https://github.com/Qetesh/logi-options-plus-mini/releases)体验，并反馈使用过程中遇到的问题或建议 ❤️
-
-<img width="600" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/11adddd4-bf0e-4e6d-b164-483b2521e228">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/86024914-4650-4966-ba81-77d59fee5696">
   <img alt="Logi Options+ mini" src="https://github.com/user-attachments/assets/86024914-4650-4966-ba81-77d59fee5696" width="600" > 
 </picture>
+
+<img width="600" src="https://github.com/user-attachments/assets/5121e1c2-d4bb-4300-b107-511d4be6e2bf" />
 
 <img width="600" alt="image" src="https://github.com/Qetesh/logi-options-plus-mini/assets/4559341/d4c503a9-51d8-4a18-af90-a3f3be508e8b">
 <img width="600" alt="image" src="https://github.com/Qetesh/logi-options-plus-mini/assets/4559341/14a85961-b022-4fc9-99bf-6e30b071f54c">
@@ -49,8 +47,9 @@
 ## 特性
 
 - 定制化Logi Options+功能
-- 易于使用的交互设计
+- 易于使用的交互体验
 - 卸载升级时自动保留配置
+- 支持安装离线版Logi Options+
 - 可定制功能
   - analytics 用户分享应用程序使用情况和诊断数据
   - flow
@@ -70,10 +69,6 @@
 下载最新版本 [GitHub Releases](https://github.com/Qetesh/logi-options-plus-mini/releases/latest)
 
 [<img width="64" alt="logi option plus1" src="https://github.com/user-attachments/assets/2c57172a-b1e3-4bab-abb8-6c60425ca640" />](https://github.com/Qetesh/logi-options-plus-mini/releases/latest)
-
-🔔 由于没有使用开发者证书签署应用，macOS可能会显示安全警告，需前往系统设置 → 隐私与安全 → 已阻止“Logi Options+mini”以保护Mac。然后点击“仍要打开”以运行该应用程序。
-
-![WX20250305-181838@2x](https://github.com/user-attachments/assets/ca75fad3-b1e6-4b51-ba2c-f4b8e5770fb7)
 
 ### 使用 Windows 原生应用
 
