@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 import SwiftUI
 import Sparkle
 import Logging
@@ -17,57 +18,53 @@ private let lastCheckDateFormatter: DateFormatter = {
     return formatter
 }()
 
-enum logiOptionsPlusMiniServer: String, CaseIterable, Identifiable {
-    case Global, China
-    
-    var id: Self { self }
-    
-    var description: String {
-        switch self {
-        case .Global: return "Global"
-        case .China: return "China"
-        }
-    }
-}
-
 struct UpdatesPreferencePane: View {
     private let updater = UpdaterManager.shared.updater
-    @State var selectedlogiOptionsPlusMiniServer: logiOptionsPlusMiniServer = .Global
+    @AppStorage(logiOptionsPlusMiniServer.userDefaultsKey)
+    private var selectedServerRawValue = logiOptionsPlusMiniServer.Global.rawValue
     @State private var autoInstallation: Bool = false
     @State private var lastCheckDate: Date? = nil
-    
+
+    private var selectedServer: logiOptionsPlusMiniServer {
+        logiOptionsPlusMiniServer(rawValue: selectedServerRawValue) ?? .Global
+    }
+
+    private var selectedServerBinding: Binding<logiOptionsPlusMiniServer> {
+        Binding(
+            get: { selectedServer },
+            set: { newValue in
+                selectedServerRawValue = newValue.rawValue
+                UpdaterManager.shared.setUpdateServer(newValue)
+            }
+        )
+    }
+
+    private var serverDescription: String {
+        switch selectedServer {
+        case .Automatic:
+            return String(localized: "Automatically select the update server based on the current network region.")
+        case .Global, .China:
+            return String(localized: "Choose update server for Logi Options+ mini")
+        }
+    }
+
     // Timer publisher for refreshing last check date
     private let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             GroupBox(label: Text("Update server")) {
                 VStack(alignment: .leading) {
-                    Picker("Logi Options+ mini Server", selection: $selectedlogiOptionsPlusMiniServer) {
-                        ForEach(logiOptionsPlusMiniServer.allCases, id: \.self) { dataSource in
-                            Text(dataSource.description)
-                                .tag(dataSource)
+                    Picker("Logi Options+ mini Server", selection: selectedServerBinding) {
+                        ForEach(logiOptionsPlusMiniServer.allCases) { server in
+                            Text(server.description)
+                                .tag(server)
                         }
                     }
                     .labelsHidden()
                     .fixedSize()
-                    .onAppear {
-                        loadServer(&selectedlogiOptionsPlusMiniServer, key: "selectedlogiOptionsPlusMiniServer")
-                    }
-                    .onChange(of: selectedlogiOptionsPlusMiniServer) {
-                        saveServer(selectedlogiOptionsPlusMiniServer, key: "selectedlogiOptionsPlusMiniServer")
-                        
-                        if selectedlogiOptionsPlusMiniServer.description == "China" {
-                            UserDefaults.standard.set("https://v.qetesh.cc/d/Public/appcast.xml", forKey: "SUFeedURL")
-                        } else {
-                            updater.clearFeedURLFromUserDefaults()
-                        }
-                        let SUFeedURLFromINFO = Bundle.main.infoDictionary?["SUFeedURL"] as? String ?? ""
-                        let SUFeedURLFromUserDefaults = UserDefaults.standard.string(forKey: "SUFeedURL") ?? SUFeedURLFromINFO
-                        Logger.app.debug("\(String(localized: "Update server changed to")): \(SUFeedURLFromUserDefaults)")
-                    }
-                    
-                    Text("Choose update server for Logi Options+ mini")
+
+                    Text(serverDescription)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -87,8 +84,8 @@ struct UpdatesPreferencePane: View {
                         Logger.app.debug("\(String(localized: "Initial auto-update state")): \(autoInstallation ? String(localized: "enabled") : String(localized: "disabled"))")
                     }
                     .onChange(of: autoInstallation) { oldValue, newValue in
-                        updater.automaticallyChecksForUpdates = newValue
-                        Logger.app.debug("\(String(localized: "Auto-update")) \(updater.automaticallyChecksForUpdates ? String(localized: "enabled") : String(localized: "disabled"))")
+                        UpdaterManager.shared.setAutomaticallyChecksForUpdates(newValue)
+                        Logger.app.debug("\(String(localized: "Auto-update")) \(newValue ? String(localized: "enabled") : String(localized: "disabled"))")
                         Logger.app.debug("\(String(localized: "Update check frequency")): \(String(localized: "every")) \(Int(updater.updateCheckInterval/3600)) \(String(localized: "hours"))")
                     }
                 }
@@ -101,7 +98,7 @@ struct UpdatesPreferencePane: View {
             HStack {
                 Spacer()
                 VStack(spacing: 4) {
-                    Button("Check for Updates", action: updater.checkForUpdates)
+                    Button("Check for Updates", action: UpdaterManager.shared.checkForUpdates)
                     
                     if let date = lastCheckDate {
                         Text("Last checked: \(date, formatter: lastCheckDateFormatter)")
@@ -127,16 +124,6 @@ struct UpdatesPreferencePane: View {
             }
         }
         
-    }
-    
-    func saveServer<T>(_ server: T, key: String) where T: RawRepresentable, T.RawValue == String {
-        UserDefaults.standard.set(server.rawValue, forKey: key)
-    }
-    
-    func loadServer(_ server: inout logiOptionsPlusMiniServer, key: String) {
-        if let rawValue = UserDefaults.standard.string(forKey: key) {
-            server = logiOptionsPlusMiniServer(rawValue: rawValue) ?? .Global
-        }
     }
     
 }

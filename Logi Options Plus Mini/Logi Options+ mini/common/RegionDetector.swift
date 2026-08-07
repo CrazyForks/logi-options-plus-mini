@@ -9,6 +9,34 @@ import SwiftUI
 import Foundation
 import Logging
 
+enum InstallerDownloadSource: String, CaseIterable, Identifiable {
+    case automatic
+    case global
+    case china
+
+    static let userDefaultsKey = "installerDownloadSource"
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .automatic:
+            return String(localized: "Automatic")
+        case .global:
+            return String(localized: "Global")
+        case .china:
+            return String(localized: "China")
+        }
+    }
+
+    static var current: InstallerDownloadSource {
+        guard let rawValue = UserDefaults.standard.string(forKey: userDefaultsKey) else {
+            return .automatic
+        }
+        return InstallerDownloadSource(rawValue: rawValue) ?? .automatic
+    }
+}
+
 /// Region detector for determining if user is in mainland China
 class RegionDetector: ObservableObject {
     @Published var isInChina: Bool = false
@@ -24,9 +52,9 @@ class RegionDetector: ObservableObject {
         errorMessage = nil
         
         do {
-            Logger.app.info("🗺️ \(String(localized: "Region detection via")) \(traceURL)")
+            Logger.app.debug("🗺️ \(String(localized: "Region detection via")) \(traceURL)")
             isInChina = try await fetchRegionInfo()
-            Logger.app.info("🗺️ \(String(localized: "Region")): \(regionCode == "China" ? String(localized: "China") : String(localized: "Global"))", metadata: ["isInChina": .stringConvertible(isInChina)])
+            Logger.app.debug("🗺️ \(String(localized: "Region")): \(regionCode == "China" ? String(localized: "China") : String(localized: "Global"))", metadata: ["isInChina": .stringConvertible(isInChina)])
         } catch {
             errorMessage = "Detection failed: \(error.localizedDescription)"
             Logger.app.error("\(String(localized: "Unable to detect location"))", metadata: ["error": .stringConvertible(error.localizedDescription)])

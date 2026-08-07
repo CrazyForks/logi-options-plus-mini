@@ -71,6 +71,26 @@
         }
       }
     },
+    "Always use the China installer download source without detecting the network region." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "始终使用中国大陆安装包下载源，不检测当前网络区域。"
+          }
+        }
+      }
+    },
+    "Always use the Global installer download source without detecting the network region." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "始终使用 Global 安装包下载源，不检测当前网络区域。"
+          }
+        }
+      }
+    },
     "App helper" : {
       "localizations" : {
         "zh-Hans" : {
@@ -238,6 +258,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自动更新"
+          }
+        }
+      }
+    },
+    "Automatic" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动"
+          }
+        }
+      }
+    },
+    "Automatically select the installer download source based on the current network region." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "根据当前网络区域自动选择安装包下载源。"
+          }
+        }
+      }
+    },
+    "Automatically select the update server based on the current network region." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "根据当前网络区域自动选择更新服务器。"
           }
         }
       }
@@ -472,6 +522,16 @@
         }
       }
     },
+    "Continue" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "继续"
+          }
+        }
+      }
+    },
     "Connection to app helper closed normally" : {
       "localizations" : {
         "zh-Hans" : {
@@ -578,6 +638,19 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "下载失败"
+          }
+        }
+      }
+    },
+    "Download source" : {
+
+    },
+    "Download Source" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下载源"
           }
         }
       }
@@ -912,6 +985,16 @@
         }
       }
     },
+    "Install Offline Package?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装离线包？"
+          }
+        }
+      }
+    },
     "Install App Helper" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1162,6 +1245,16 @@
         }
       }
     },
+    "More" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更多"
+          }
+        }
+      }
+    },
     "Never checked" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1208,6 +1301,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "没有需要删除的文件"
+          }
+        }
+      }
+    },
+    "Offline Install/Reinstall" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "离线安装/重新安装"
           }
         }
       }
@@ -1512,6 +1615,16 @@
         }
       }
     },
+    "The offline installer is larger than 1.3 GB and may not contain the latest version. However, it can repair some installation or application errors.\n\nDo you want to continue?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "离线安装包大小超过 1.3 GB，并且可能不是最新版本。但它可以修复部分安装或应用异常。\n\n是否继续？"
+          }
+        }
+      }
+    },
     "The fix operation launches the official repair tool to resolve startup issues.\n\nDetail:\n https://support.logi.com/hc/zh-cn/articles/37493733117847-Options-and-G-HUB-macOS-Certificate-Issue" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1704,6 +1817,126 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "查看详情"
+          }
+        }
+      }
+    },
+    "Enables or disables Actions Ring feature. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用 Actions Ring 功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables AI Prompt Builder feature. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用 AI Prompt Builder 功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables app updates. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用应用更新。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables device firmware updates. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用设备固件更新。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables device recommendation feature. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用设备推荐功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables keyboard backlight on the supported keyboards. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用受支持键盘的背光功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables LogiVoice feature. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用 LogiVoice 功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Enables or disables Smart Actions feature. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用或禁用 Smart Actions 功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Installs the app silently without the UI." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在不显示界面的情况下静默安装应用。"
+          }
+        }
+      }
+    },
+    "Shows or hides ability for users to sign into the app. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示或隐藏用户登录应用的功能。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Shows or hides choice for users to opt in to share app usage and diagnostics data. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示或隐藏允许用户选择是否共享应用使用情况和诊断数据的选项。默认值为“是”。"
+          }
+        }
+      }
+    },
+    "Shows or hides the Flow feature. Default value is Yes." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示或隐藏 Flow 功能。默认值为“是”。"
           }
         }
       }

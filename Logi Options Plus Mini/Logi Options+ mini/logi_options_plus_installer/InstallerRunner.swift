@@ -3,8 +3,10 @@ import Logging
 import AppKit
 
 class InstallerRunner {
-    func runInstaller(selectedFeatures: String) async throws {
-        let installerURL = FileUtils.temporaryFileURL(forFileName: "logioptionsplus_installer/logioptionsplus_installer.app/Contents/MacOS/logioptionsplus_installer")
+    func runInstaller(selectedFeatures: String, type: DownloadType = .installer) async throws {
+        let installerURL = FileUtils.temporaryFileURL(
+            forFileName: "\(type.extractionDirectoryName)/\(type.installerAppBundleName)/Contents/MacOS/logioptionsplus_installer"
+        )
         try await runExecutable(at: installerURL, arguments: selectedFeatures, isPatch: false)
     }
     

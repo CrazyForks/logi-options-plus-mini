@@ -33,18 +33,18 @@ enum Feature: String, CaseIterable {
     
     var help: String {
         switch self {
-        case .quiet: return "Installs the app silently without the UI."
-        case .analytics: return "Shows or hides choice for users to opt in to share app usage and diagnostics data. Default value is Yes."
-        case .flow: return "Shows or hides the Flow feature. Default value is Yes."
-        case .sso: return "Shows or hides ability for users to sign into the app. Default value is Yes."
-        case .update: return "Enables or disables app updates. Default value is Yes."
-        case .dfu: return "Enables or disables device firmware updates. Default value is Yes."
-        case .backlight: return "Enables or disables keyboard backlight on the supported keyboards. Default value is Yes."
-        case .logivoice: return "Enables or disables LogiVoice feature. Default value is Yes."
-        case .aipromptbuilder: return "Enables or disables AI Prompt Builder feature. Default value is Yes."
-        case .deviceRecommendation: return "Enables or disables device recommendation feature. Default value is Yes."
-        case .smartactions: return "Enables or disables Smart Actions feature. Default value is Yes."
-        case .actionsRing: return "Enables or disables Actions Ring feature. Default value is Yes."
+        case .quiet: return String(localized: "Installs the app silently without the UI.")
+        case .analytics: return String(localized: "Shows or hides choice for users to opt in to share app usage and diagnostics data. Default value is Yes.")
+        case .flow: return String(localized: "Shows or hides the Flow feature. Default value is Yes.")
+        case .sso: return String(localized: "Shows or hides ability for users to sign into the app. Default value is Yes.")
+        case .update: return String(localized: "Enables or disables app updates. Default value is Yes.")
+        case .dfu: return String(localized: "Enables or disables device firmware updates. Default value is Yes.")
+        case .backlight: return String(localized: "Enables or disables keyboard backlight on the supported keyboards. Default value is Yes.")
+        case .logivoice: return String(localized: "Enables or disables LogiVoice feature. Default value is Yes.")
+        case .aipromptbuilder: return String(localized: "Enables or disables AI Prompt Builder feature. Default value is Yes.")
+        case .deviceRecommendation: return String(localized: "Enables or disables device recommendation feature. Default value is Yes.")
+        case .smartactions: return String(localized: "Enables or disables Smart Actions feature. Default value is Yes.")
+        case .actionsRing: return String(localized: "Enables or disables Actions Ring feature. Default value is Yes.")
         }
     }
 }

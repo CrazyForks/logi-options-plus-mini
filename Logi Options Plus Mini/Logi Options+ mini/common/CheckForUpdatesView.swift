@@ -23,17 +23,19 @@ final class CheckForUpdatesViewModel: ObservableObject {
 // See https://stackoverflow.com/questions/68553092/menu-not-updating-swiftui-bug for more info
 struct CheckForUpdatesView: View {
     @ObservedObject private var checkForUpdatesViewModel: CheckForUpdatesViewModel
+    private let updaterManager: UpdaterManager
     private let updater: SPUUpdater
     
-    init(updater: SPUUpdater) {
-        self.updater = updater
+    init(updaterManager: UpdaterManager) {
+        self.updaterManager = updaterManager
+        self.updater = updaterManager.updater
         
         // Create our view model for our CheckForUpdatesView
         self.checkForUpdatesViewModel = CheckForUpdatesViewModel(updater: updater)
     }
     
     var body: some View {
-        Button("Check for Updates", action: updater.checkForUpdates)
+        Button("Check for Updates", action: updaterManager.checkForUpdates)
             .disabled(!checkForUpdatesViewModel.canCheckForUpdates)
     }
 }

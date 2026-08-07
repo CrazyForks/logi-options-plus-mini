@@ -6,6 +6,7 @@ struct LogiOptionsPlusView: View {
     @State private var isLoading: Bool = false
     @State private var isUninstalling: Bool = false
     @State private var isFixing: Bool = false
+    @State private var showOfflineInstallConfirmation: Bool = false
     @State private var showFixConfirmation: Bool = false
     @State private var updateTextIsLoading: Bool = false
     @State private var installedVersionUpdateLoading: Bool = false
@@ -13,7 +14,6 @@ struct LogiOptionsPlusView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.openURL) private var openURL
     @State private var logiOptionsPlusLatestVersion: String = ""
-    @AppStorage("showUninstallButton") private var showUninstallButton: Bool = false
     @State private var isFeatureListHovered: Bool = false
 
     init(controller: InstallerController) {
@@ -75,7 +75,7 @@ struct LogiOptionsPlusView: View {
                                 if !installedVersionUpdateLoading {
                                     Task {
                                         installedVersionUpdateLoading = true
-                                        try await Task.sleep(nanoseconds: 100_000_000)
+                                        try? await Task.sleep(nanoseconds: 100_000_000)
                                         controller.updateInstalledVersion()
                                         installedVersionUpdateLoading = false
                                     }
@@ -134,55 +134,37 @@ struct LogiOptionsPlusView: View {
                         }
                         .frame(width: 140, height: 20)
 
-                        if showUninstallButton {
-                            ZStack {
-                                if isUninstalling {
-                                    ProgressView()
-                                        .progressViewStyle(.circular)
-                                        .scaleEffect(0.5)
-                                } else {
-                                    let isDisabled = isLoading || isFixing
-                                    let buttonColor: Color = isDisabled ? .pink.opacity(0.4) : .red
-                                    
-                                    Button(action: {
-                                        Task {
-                                            isUninstalling = true
-                                            await controller.uninstall()
-                                            isUninstalling = false
-                                        }
-                                    }) {
-                                        Text("Uninstall")
-                                            .font(.headline)
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                    .tint(buttonColor)
-                                    .background(Color.red)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(5)
-                                    .glass(
-                                        radius: 20,
-                                        color: buttonColor,
-                                        material: .regularMaterial,
-                                        gradientOpacity: isDisabled ? 0.3 : 0.7,
-                                        shadowColor: buttonColor,
-                                        shadowRadius: isDisabled ? 5 : 10
-                                    )
-                                    .disabled(isDisabled)
-                                }
-                            }
-                            .frame(width: 60, height: 20)
-                        }
-
                         ZStack {
-                            if isFixing {
+                            if isFixing || isUninstalling {
                                 ProgressView()
                                     .progressViewStyle(.circular)
                                     .scaleEffect(0.5)
                             } else {
                                 let isDisabled = isLoading || isUninstalling
-                                let buttonColor: Color = isDisabled ? .gray.opacity(0.4) : .gray
+                                let toolButtonBaseColor = Color(red: 0.56, green: 0.56, blue: 0.58)
+                                let buttonColor: Color = isDisabled ? toolButtonBaseColor.opacity(0.4) : toolButtonBaseColor
                                 
                                 Menu {
+                                    Button(role: .destructive) {
+                                        Task {
+                                            isUninstalling = true
+                                            await controller.uninstall()
+                                            isUninstalling = false
+                                        }
+                                    } label: {
+                                        Label(String(localized: "Uninstall"), systemImage: "trash")
+                                    }
+
+                                    Divider()
+
+                                    Button {
+                                        showOfflineInstallConfirmation = true
+                                    } label: {
+                                        Label(String(localized: "Offline Install/Reinstall"), systemImage: "square.and.arrow.down")
+                                    }
+
+                                    Divider()
+
                                     Button {
                                         showFixConfirmation = true
                                     } label: {
@@ -199,26 +181,50 @@ struct LogiOptionsPlusView: View {
                                         Label(String(localized: "Fix JavaScript Error"), systemImage: "exclamationmark.triangle")
                                     }
                                 } label: {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "wrench.and.screwdriver")
-                                            .symbolEffect(.bounce, value: isFixing)
+                                    HStack(spacing: 6) {
+                                        Text(String(localized: "More"))
+                                            .font(.headline)
+                                        
+                                        Image(systemName: "chevron.down")
+                                            .font(.system(size: 11, weight: .semibold))
                                     }
-                                    .font(.headline)
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, 12)
+                                    .frame(height: 23)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                            .fill(buttonColor)
+                                    }
                                 }
-                                .menuStyle(.borderlessButton)
-                                .frame(width: 44, height: 28)
-                                .background(buttonColor)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
+                                .menuStyle(.button)
+                                .menuIndicator(.hidden)
+                                .buttonStyle(.plain)
                                 .glass(
                                     radius: 20,
                                     color: buttonColor,
+                                    colorOpacity: isDisabled ? 0.12 : 0.3,
                                     material: .regularMaterial,
-                                    gradientOpacity: isDisabled ? 0.3 : 0.7,
+                                    gradientOpacity: isDisabled ? 0.45 : 1.0,
                                     shadowColor: buttonColor,
-                                    shadowRadius: isDisabled ? 5 : 10
+                                    shadowOpacity: isDisabled ? 0.55 : 0.9,
+                                    shadowRadius: isDisabled ? 7 : 14
                                 )
                                 .disabled(isDisabled)
+                                .confirmationDialog(
+                                    String(localized: "Install Offline Package?"),
+                                    isPresented: $showOfflineInstallConfirmation
+                                ) {
+                                    Button(String(localized: "Continue")) {
+                                        Task {
+                                            isLoading = true
+                                            await controller.installOffline()
+                                            isLoading = false
+                                        }
+                                    }
+                                    Button(String(localized: "Cancel"), role: .cancel) { }
+                                } message: {
+                                    Text("The offline installer is larger than 1.3 GB and may not contain the latest version. However, it can repair some installation or application errors.\n\nDo you want to continue?")
+                                }
                                 .confirmationDialog(String(localized: "Run Fix Tool"), isPresented: $showFixConfirmation) {
                                     Button(String(localized: "Confirm")) {
                                         Task {
@@ -261,7 +267,8 @@ struct LogiOptionsPlusView: View {
                                 }
                             }
                         }
-                        .frame(width: 60, height: 20)
+                        .frame(width: 80, height: 20)
+                        .padding(.leading, 8)
                     }
                 }
                 

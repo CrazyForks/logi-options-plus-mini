@@ -28,6 +28,7 @@
   "buttons": {
     "install": "Install/Update",
     "uninstall": "Uninstall",
+    "offlineInstall": "Offline Install/Update",
     "fix": "Fix ▼"
   },
   "fix": {
@@ -70,12 +71,13 @@
     "installing": "Starting installation...",
     "installSuccess": "Installation completed successfully!",
     "installFailed": "Installation failed: {{message}}",
+    "offlineInstalling": "Starting offline installation/update...",
+    "offlineInstallSuccess": "Offline installation/update completed successfully!",
+    "offlineInstallFailed": "Offline installation/update failed: {{message}}",
     "installVersion": "Installed version: {{version}}",
     "uninstalling": "Starting uninstallation...",
-    "uninstallSuccess": "Uninstallation completed successfully!",
     "uninstallFailed": "Uninstallation failed: {{message}}",
     "uninstallNoteRemoved": "Logi Options+ has been successfully removed from your system.",
-    "uninstallNoteStillInstalled": "Due to an issue with the official uninstall logic, updates to the installed version information ({{version}}) may be delayed.",
     "scanning": "Scanning for JavaScript error files...",
     "noCorruptedFiles": "No corrupted config files found",
     "foundCorrupted": "Found {{count}} corrupted files",
@@ -101,7 +103,11 @@
     "update": "Update",
     "autoUpdate": "Auto Check Update",
     "updateSource": "Logi Options+ mini Update Source",
-    "updateSourceHelp": "Update Server: Global (GitHub) / China (Shanghai Server)",
+    "updateSourceAuto": "Auto",
+    "updateSourceHelp": "Update Server: Auto (region detection) / Global (GitHub) / China (Shanghai Server)",
+    "downloadSource": "Download Source",
+    "downloadSourceHelp": "Download location for install/uninstall packages: Auto (region detection) / Global / China. Selecting Global or China skips region detection",
+    "downloadSourceAuto": "Auto",
     "checkUpdate": "Check for Updates",
     "lastCheck": "Last Check",
     "updateAvailable": "New version available: {{version}}",
@@ -117,6 +123,8 @@
     "newVersion": "New Version",
     "noReleaseNotes": "No release notes",
     "installUpdate": "Install Update",
+    "downloadingUpdate": "Downloading update…",
+    "installingUpdate": "Installing update…",
     "updateAvailable": "A new version of Logi Options+ mini is available!",
     "versionAvailable": "{{newVersion}} is now available - you have {{currentVersion}}. Would you like to download it now?"
   }

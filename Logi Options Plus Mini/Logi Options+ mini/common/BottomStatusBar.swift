@@ -11,7 +11,6 @@ struct BottomStatusBar: View {
     let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
     @StateObject private var agentManager = AgentManager.shared
     @Environment(\.openWindow) private var openWindow
-    @AppStorage("showUninstallButton") private var showUninstallButton: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -19,13 +18,6 @@ struct BottomStatusBar: View {
 
             HStack {
                 Spacer()
-                // Hidden button to toggle uninstall button visibility
-                Color.clear
-                    .frame(width: 20, height: 20)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        showUninstallButton.toggle()
-                    }
                 SettingsLink {
                     Circle()
                         .frame(width: 10, height: 10)

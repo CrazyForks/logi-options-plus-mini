@@ -137,9 +137,9 @@ struct UILogHandler: LogHandler {
         self.logStore = logStore
     }
     
-    func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, source: String, file: String, function: String, line: UInt) {
+    func log(event: LogEvent) {
         let dateString = Self.dateFormatter.string(from: Date())
-        let logEntry = "[\(dateString)] [\(level.rawValue.uppercased())] \(message)"
+        let logEntry = "[\(dateString)] [\(event.level.rawValue.uppercased())] \(event.message)"
         logStore.append(logEntry)
     }
 }

@@ -1,11 +1,11 @@
 {
-  "version": "v1.9.0",
-  "notes": "v1.9.0\n🎉 Improved version checking logic.\nBug fixes and general improvements.\n\n🔄 Recent Updates:\nFixed an issue where background processes could remain after the app exited due to the Settings or Update window.",
-  "pub_date": "2026-07-18T12:00:00.00Z",
+  "version": "v2.0.0",
+  "notes": "v2.0.0\n🎉 Added offline installation.\nManual download source selection, and automatic region detection.\nAdded download progress and improved Windows theme support.\n\n🔄 Recent Updates:\nImproved version checking logic.\nImproved install/uninstall reliability and temporary file management.\nGeneral UI and stability improvements.",
+  "pub_date": "2026-08-07T12:00:00.00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTTDdqaVJKVDYwWnI0Znh5andOcEc5d09XaWtrNFZTSUt6SFlBNlFCa250TGFwTEI4cUgyVlRKYjZueU5wVll2UkJaTktHOWI2MkxJVVZ6cHNBNyt0R1BLTk0yd3MxT0FjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0MzUxNTQ5CWZpbGU6TG9naSBPcHRpb25zKyBtaW5pXzEuOS4wX3g2NC1zZXR1cC5leGUKVGFUWHRhK2YwcmhXM0I1T0FhL0JRNUdNWHFSbGFyOHZVdGFSalUwT2tWbmlOVnNFN2JPalhKK29vVS9SOXRuMk1Vblp6eDBtYmYxbnNSUlBYZyszREE9PQo=",
-      "url": "https://github.com/Qetesh/logi-options-plus-mini/releases/download/v1.9.0/Logi.Options+.mini_1.9.0_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTTDdqaVJKVDYwWnZtYmI4S2R1TnA5WnZvUkpxWnVxcmo2THpsMkRiV25vcEdGSXAxVnVZckUyRnFMcHplUVR1ajJOS1pkUUwvUUJ6Y2N5ZmVTYXBxaWtwejVRcTROcHdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg2MDkxMDY5CWZpbGU6TG9naSBPcHRpb25zKyBtaW5pXzIuMC4wX3g2NC1zZXR1cC5leGUKejh2Znhobm5CN3kya2ZRUUdxcWZsbGtYLzNZSEllcTdCbEFjRExtRktWSWhTdHFNSzRJQ04rWkRJNU40cWZ2d1JERlJZanpYTXBObnVLWW50MkI0Qnc9PQo=",
+      "url": "https://github.com/Qetesh/logi-options-plus-mini/releases/download/v2.0.0/Logi.Options+.mini_2.0.0_x64-setup.exe"
     }
   }
 }

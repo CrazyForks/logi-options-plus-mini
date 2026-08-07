@@ -13,9 +13,10 @@ import {
 } from 'lucide-react';
 import { listen } from '@tauri-apps/api/event';
 import { invoke } from '@tauri-apps/api/core';
+import { getVersion } from '@tauri-apps/api/app';
 import { openUpdateWindow } from './utils';
 import { getUpdateEndpoint } from './config/updateSource';
-import { getVersionInfo, getInstalledVersion, getLatestVersion, install, uninstall } from './api';
+import { getVersionInfo, getInstalledVersion, getLatestVersion, install, uninstall, installOffline } from './api';
 import type { FeatureInfo, VersionInfo, InstallStep } from './types';
 import './App.css';
 
@@ -49,8 +50,13 @@ function App() {
   const [logLevel, setLogLevel] = useState<string>(() => {
     return localStorage.getItem('logLevel') || 'info';
   });
+  const [downloadSource, setDownloadSource] = useState<string>(() => {
+    return localStorage.getItem('downloadSource') || 'auto';
+  });
+  const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [refreshingInstalled, setRefreshingInstalled] = useState(false);
   const [refreshingLatest, setRefreshingLatest] = useState(false);
+  const [appVersion, setAppVersion] = useState('');
 
   const addLog = useCallback((message: string, level: string = 'info') => {
     const timestamp = new Date().toLocaleTimeString();
@@ -77,12 +83,31 @@ function App() {
       if (e.key === 'logLevel' && e.newValue) {
         setLogLevel(e.newValue);
       }
+      if (e.key === 'downloadSource' && e.newValue) {
+        setDownloadSource(e.newValue);
+      }
     };
     window.addEventListener('storage', handleStorageChange);
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, [i18n]);
+
+  // 监听后端下载进度事件，更新下载百分比
+  useEffect(() => {
+    const unlistenPromise = listen<{ downloaded: number; total: number }>(
+      'install-progress',
+      (event) => {
+        const { downloaded, total } = event.payload;
+        if (total && total > 0) {
+          setDownloadProgress(Math.min(100, Math.floor((downloaded / total) * 100)));
+        }
+      }
+    );
+    return () => {
+      unlistenPromise.then((unlisten) => unlisten());
+    };
+  }, []);
 
   // 当日志更新时自动滚动到底部
   useEffect(() => {
@@ -191,6 +216,11 @@ function App() {
     loadData();
   }, [addLog]);
 
+  // 获取应用版本号（用于右下角小字展示）
+  useEffect(() => {
+    getVersion().then(setAppVersion).catch(() => setAppVersion('1.0.0'));
+  }, []);
+
   // 启动时自动检查更新（后台进行，不阻塞UI）
   useEffect(() => {
     const autoCheckUpdate = localStorage.getItem('autoCheckUpdate') === 'true';
@@ -206,7 +236,7 @@ function App() {
 
         if (result) {
           const [version, body] = result.split('|');
-          await openUpdateWindow(version, body);
+          await openUpdateWindow(version, body, updateSource);
         }
       } catch (error) {
         console.error('Auto check update failed:', error);
@@ -237,6 +267,7 @@ function App() {
 
   const handleInstall = async () => {
     setIsLoading(true);
+    setDownloadProgress(0);
     addLog(t('logs.installing'));
     
     // 如果当前是 completed 或 failed，先重置到 idle (0%)，延迟后再开始
@@ -265,7 +296,7 @@ function App() {
       addLog(`Features: ${featureArray.map(([k, v]) => `${k}:${v}`).join(' ')}`);
       
       // 步骤会由后端日志消息自动更新
-      const result = await install(featureArray);
+      const result = await install(featureArray, downloadSource);
       
       if (result.success) {
         setCurrentStep('completed');
@@ -289,6 +320,7 @@ function App() {
 
   const handleUninstall = async () => {
     setIsLoading(true);
+    setDownloadProgress(0);
     addLog(t('logs.uninstalling'));
     
     // 如果当前是 completed 或 failed，先重置到 idle (0%)，延迟后再开始
@@ -310,26 +342,81 @@ function App() {
     }, 100);
   };
 
+  const handleOfflineInstall = async () => {
+    setIsLoading(true);
+    setDownloadProgress(0);
+    addLog(t('logs.offlineInstalling'));
+
+    // 如果当前是 completed 或 failed，先重置到 idle (0%)，延迟后再开始
+    if (currentStep === 'completed' || currentStep === 'failed') {
+      setCurrentStep('idle');
+      // 等待进度条动画到 0% 后再开始安装
+      setTimeout(async () => {
+        setCurrentStep('downloading');
+        await performOfflineInstall();
+      }, 300);
+      return;
+    }
+
+    // 正常开始安装流程
+    setCurrentStep('idle');
+    setTimeout(() => {
+      setCurrentStep('downloading');
+      performOfflineInstall();
+    }, 100);
+  };
+
+  // 实际执行离线版安装的逻辑
+  const performOfflineInstall = async () => {
+    try {
+      const featureArray: [string, boolean][] = features.map(f => [f.id, selectedFeatures.has(f.id)]);
+      addLog(`Features: ${featureArray.map(([k, v]) => `${k}:${v}`).join(' ')}`);
+
+      // 步骤会由后端日志消息自动更新
+      const result = await installOffline(featureArray, downloadSource);
+
+      if (result.success) {
+        setCurrentStep('completed');
+        addLog(t('logs.offlineInstallSuccess'));
+        addLog(t('logs.installVersion', { version: result.version }));
+
+        // Refresh version info
+        const newVersionInfo = await getVersionInfo();
+        setVersionInfo(newVersionInfo);
+      } else {
+        setCurrentStep('failed');
+        addLog(t('logs.offlineInstallFailed', { message: result.message }));
+      }
+    } catch (error) {
+      setCurrentStep('failed');
+      addLog(t('logs.error', { error }));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // 实际执行卸载的逻辑
   const performUninstall = async () => {
     try {
-      const result = await uninstall();
+      const result = await uninstall(downloadSource);
       
       if (result.success) {
-        setCurrentStep('completed');
-        addLog(t('logs.uninstallSuccess'));
-        
-        // Refresh version info after uninstall (with small delay to ensure registry is updated)
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        const newVersionInfo = await getVersionInfo();
-        setVersionInfo(newVersionInfo);
-        
-        // Show appropriate message based on uninstall result
-        if (newVersionInfo.installed_version === 'not installed' || newVersionInfo.installed_version === t('version.notInstalled')) {
-          addLog(t('logs.uninstallNoteRemoved'));
-        } else {
-          addLog(t('logs.uninstallNoteStillInstalled', { version: newVersionInfo.installed_version }));
+        // 保持“卸载中”状态，每 1 秒检测已安装版本，直到检测不到版本号
+        setCurrentStep('uninstalling');
+
+        // 每秒刷新已安装版本，检测不到版本号后才视为卸载成功
+        const MAX_POLL_RETRIES = 120;
+        for (let i = 0; i < MAX_POLL_RETRIES; i++) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          const newVersionInfo = await getVersionInfo();
+          setVersionInfo(newVersionInfo);
+          if (newVersionInfo.installed_version === 'not installed' || newVersionInfo.installed_version === t('version.notInstalled')) {
+            break;
+          }
         }
+
+        setCurrentStep('completed');
+        addLog(t('logs.uninstallNoteRemoved'));
       } else {
         setCurrentStep('failed');
         addLog(t('logs.uninstallFailed', { message: result.message }));
@@ -397,7 +484,7 @@ function App() {
   const getStepText = (): string => {
     switch (currentStep) {
       case 'idle': return t('progress.idle');
-      case 'downloading': return t('progress.downloading');
+      case 'downloading': return downloadProgress > 0 ? `${t('progress.downloading')} (${downloadProgress}%)` : t('progress.downloading');
       case 'extracting': return t('progress.extracting');
       case 'backup': return t('progress.backup');
       case 'uninstalling': return t('progress.uninstalling');
@@ -445,8 +532,9 @@ function App() {
                   url: url,
                   title: 'Settings',
                   width: 400,
-                  height: 380,
-                  resizable: false,
+                  height: 600,
+                  minHeight: 600,
+                  resizable: true,
                   center: true,
                 });
                 webview.once('tauri://created', () => {
@@ -538,6 +626,15 @@ function App() {
             </button>
           )}
 
+          <button
+            className="btn btn-secondary"
+            onClick={handleOfflineInstall}
+            disabled={isLoading}
+          >
+            <Download size={16} />
+            <span>{t('buttons.offlineInstall')}</span>
+          </button>
+
         </div>
         </div>
 
@@ -587,6 +684,9 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* 右下角小字版本号 */}
+      <span className="app-version-badge">v{appVersion || '1.0.0'}</span>
     </div>
   );
 }

@@ -3,7 +3,6 @@ use reqwest::Client;
 use std::path::PathBuf;
 use std::time::Duration;
 use tauri::Emitter;
-use tokio::fs;
 
 fn emit_log(app: &tauri::AppHandle, message: &str, level: &str) {
     let _ = app.emit(
@@ -23,6 +22,9 @@ fn emit_log(app: &tauri::AppHandle, message: &str, level: &str) {
 const DOWNLOAD_URL_CN: &str = "https://download.logitech.com.cn/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.exe";
 const DOWNLOAD_URL: &str =
     "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.exe";
+const OFFLINE_DOWNLOAD_URL_CN: &str = "https://download.logitech.com.cn/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer_offline.exe";
+const OFFLINE_DOWNLOAD_URL: &str =
+    "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer_offline.exe";
 const VERSION_URL: &str = "https://updates.optionsplus.logitechg.com/pipeline/v2/update/optionsplus5/win/public/update.json";
 
 pub struct Downloader {
@@ -44,11 +46,30 @@ impl Downloader {
         }
     }
 
-    pub async fn detect_region_with_app(&mut self, app: &tauri::AppHandle) -> Result<bool, String> {
+    pub async fn detect_region_with_app(
+        &mut self,
+        app: &tauri::AppHandle,
+        source: Option<&str>,
+    ) -> Result<bool, String> {
+        // 当手动指定了下载源时，跳过地区检测，直接使用对应地址
+        match source {
+            Some("china") => {
+                emit_log(app, "Download source set to China", "info");
+                self.is_china = true;
+                return Ok(true);
+            }
+            Some("global") => {
+                emit_log(app, "Download source set to Global", "info");
+                self.is_china = false;
+                return Ok(false);
+            }
+            _ => {}
+        }
+
         emit_log(
             app,
             "Detecting region via https://cloudflare.com/cdn-cgi/trace",
-            "info",
+            "debug",
         );
 
         match self
@@ -61,7 +82,7 @@ impl Downloader {
             Ok(response) => {
                 if let Ok(text) = response.text().await {
                     if text.contains("loc=CN") {
-                        emit_log(app, "Detected region: China, using CN download URL", "info");
+                        emit_log(app, "Detected region: China", "debug");
                         self.is_china = true;
                         return Ok(true);
                     }
@@ -72,11 +93,7 @@ impl Downloader {
             }
         }
 
-        emit_log(
-            app,
-            "Detected region: Global, using default download URL",
-            "info",
-        );
+        emit_log(app, "Detected region: Global", "debug");
         self.is_china = false;
         Ok(false)
     }
@@ -91,28 +108,41 @@ impl Downloader {
         } else {
             DOWNLOAD_URL
         };
-
-        // Define cache directory (system cache directory)
-        let cache_dir = dirs::cache_dir()
-            .ok_or("Failed to get cache directory")?
-            .join("logi-options-plus-mini");
-
         let filename = "logioptionsplus_installer.exe";
-        let cache_path = cache_dir.join(filename);
+        self.download_to_temp(app, url, filename, temp_dir).await
+    }
 
-        // Check if cached file exists
+    pub async fn download_offline_installer_with_app(
+        &self,
+        app: &tauri::AppHandle,
+        temp_dir: &PathBuf,
+    ) -> Result<PathBuf, String> {
+        let url = if self.is_china {
+            OFFLINE_DOWNLOAD_URL_CN
+        } else {
+            OFFLINE_DOWNLOAD_URL
+        };
+        let filename = "logioptionsplus_installer_offline.exe";
+        self.download_to_temp(app, url, filename, temp_dir).await
+    }
+
+    async fn download_to_temp(
+        &self,
+        app: &tauri::AppHandle,
+        url: &str,
+        filename: &str,
+        temp_dir: &PathBuf,
+    ) -> Result<PathBuf, String> {
+        // Use cached installer if available (cache lives under the same temp_dir
+        // passed in from the installer, so it is cleaned up consistently)
+        let cache_path = temp_dir.join(filename);
         if cache_path.exists() {
             emit_log(
                 app,
                 &format!("Using cached installer from: {:?}", cache_path),
                 "debug",
             );
-            // Copy from cache to temp directory
-            let temp_path = temp_dir.join(filename);
-            fs::copy(&cache_path, &temp_path)
-                .await
-                .map_err(|e| format!("Failed to copy from cache: {}", e))?;
-            return Ok(temp_path);
+            return Ok(cache_path);
         }
 
         emit_log(
@@ -124,7 +154,7 @@ impl Downloader {
         let response = self
             .client
             .get(url)
-            .timeout(Duration::from_secs(90))
+            .timeout(Duration::from_secs(300))
             .send()
             .await
             .map_err(|e| format!("Download failed: {}", e))?;
@@ -133,32 +163,31 @@ impl Downloader {
             return Err(format!("Server returned error code: {}", response.status()));
         }
 
+        let total = response.content_length().unwrap_or(0);
         let temp_path = temp_dir.join(filename);
 
-        let bytes = response
-            .bytes()
+        // Stream the response to disk while emitting download progress
+        use futures_util::StreamExt;
+        let mut file = tokio::fs::File::create(&temp_path)
             .await
-            .map_err(|e| format!("Failed to read response: {}", e))?;
-
-        // Save to temp directory first
-        fs::write(&temp_path, &bytes)
-            .await
-            .map_err(|e| format!("Failed to save installer: {}", e))?;
-
-        // Save to cache directory
-        fs::create_dir_all(&cache_dir)
-            .await
-            .map_err(|e| format!("Failed to create cache directory: {}", e))?;
-        fs::write(&cache_path, &bytes)
-            .await
-            .map_err(|e| format!("Failed to save to cache: {}", e))?;
+            .map_err(|e| format!("Failed to create temp file: {}", e))?;
+        let mut stream = response.bytes_stream();
+        let mut downloaded: u64 = 0;
+        while let Some(chunk) = stream.next().await {
+            let chunk = chunk.map_err(|e| format!("Failed to read chunk: {}", e))?;
+            downloaded += chunk.len() as u64;
+            tokio::io::AsyncWriteExt::write_all(&mut file, &chunk)
+                .await
+                .map_err(|e| format!("Failed to write chunk: {}", e))?;
+            let _ = app.emit(
+                "install-progress",
+                serde_json::json!({ "downloaded": downloaded, "total": total }),
+            );
+        }
 
         emit_log(
             app,
-            &format!(
-                "Download complete to: {:?} (also cached at: {:?})",
-                temp_path, cache_path
-            ),
+            &format!("Download complete to: {:?}", temp_path),
             "debug",
         );
         Ok(temp_path)
